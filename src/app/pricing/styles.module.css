@@ -1,0 +1,68 @@
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+
+}
+
+.stack h4 {
+    font-weight: 600;
+}
+
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: start;
+    padding-top: 16px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.row label {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 2px;
+}
+
+.divider {
+    height: 1px;
+    width: 100%;
+    background-color: chocolate;
+    margin: 16px 0;
+}
+
+.PriceItemWrapperActive {
+    padding: 16px;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background-color: peachpuff;
+    border-radius: 16px;
+    transition: all 0.3s ease-in;
+    overflow: hidden;
+    width: 327px;
+}
+
+.PriceItemWrapperPassive {
+    padding: 16px;
+    border: 1px solid grey;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background-color: white;
+    border-radius: 16px;
+    transition: 0.3s;
+    overflow: hidden;
+    width: 327px;
+}
+
