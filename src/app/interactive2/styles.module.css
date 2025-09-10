@@ -1,0 +1,233 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.videoSection {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  height: calc(100vh - 160px);
+}
+
+.instructionVideo {
+  flex: 1;
+  background: #f5f5f5;
+  border-radius: 24px;
+  position: relative;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-size: cover;
+  background-position: center;
+}
+
+.heartRateIndicator {
+  backdrop-filter: blur(25px);
+  background: rgba(179, 179, 179, 0.82);
+  border-radius: 16px;
+  padding: 8px;
+  width: fit-content;
+}
+
+.zoneIndicators {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.zone1,
+.zone2,
+.zone3,
+.zone5 {
+  width: 4px;
+  height: 12px;
+  border-radius: 4px;
+}
+
+.zone1 {
+  background: #1a4ce5;
+}
+.zone2 {
+  background: #53afa1;
+}
+.zone3 {
+  background: #00b24a;
+}
+.zone5 {
+  background: #941d31;
+}
+
+.activeZone {
+  background: #ec5929;
+  border-radius: 8px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffffff;
+  font-family: "SF Pro Display", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.exerciseInfo {
+  color: #000000;
+}
+
+.exerciseInfo h2 {
+  font-family: "Outfit Zing", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  margin-bottom: 6px;
+}
+
+.exerciseInfo p {
+  font-family: "SF Pro Display", sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.userCamera {
+  width: 424px;
+  height: 580px;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  background: #f5f5f5;
+}
+
+.webcamVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.webcamError {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  color: #e24536;
+  font-family: "SF Pro Display", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  padding: 24px;
+}
+
+.poseDetection {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.markers {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.performanceSection {
+  height: 160px;
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 56px;
+  background: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.repCounter {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: "Outfit Zing", sans-serif;
+}
+
+.repNumber {
+  font-size: 60px;
+  line-height: 76px;
+  font-weight: 600;
+}
+
+.repLabel {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+.repMeter {
+  flex: 1;
+  height: 64px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meterLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #d7dae5;
+  top: 50%;
+}
+
+.completedReps,
+.remainingReps,
+.bonusReps {
+  display: flex;
+  gap: 8px;
+  z-index: 1;
+}
+
+.repBarCompleted {
+  width: 12px;
+  height: 64px;
+  background: #00b24a;
+  border-radius: 8px;
+}
+
+.repBarRemaining {
+  width: 12px;
+  height: 24px;
+  background: #d7dae5;
+  border-radius: 8px;
+}
+
+.repBarBonus {
+  width: 12px;
+  height: 24px;
+  background: #e3cafc;
+  border-radius: 8px;
+}
+
+.currentIndicator {
+  width: 4px;
+  height: 88px;
+  background: #e24536;
+  border-radius: 2px;
+  z-index: 2;
+}
+
+.timer {
+  font-family: "Outfit Zing", sans-serif;
+  font-size: 60px;
+  line-height: 76px;
+  font-weight: 600;
+  min-width: 160px;
+  text-align: right;
+}
