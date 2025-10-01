@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono } from "next/font/google";
+// import { Outfit } from "next/font/google";
 import "./globals.css";
 
-const inter = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: "400",
-});
+// const outfit = Outfit({
+//   subsets: ["latin"],
+//   weight: "400",
+// });
 
 export const metadata: Metadata = {
   title: "plgrnd",
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
