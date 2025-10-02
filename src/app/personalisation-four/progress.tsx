@@ -46,11 +46,11 @@ const Progress = ({
 
   return (
     <div
-      className={`w-full p-0.5 rounded-[20px] bg-gradient-to-r from-34% from-[#F3F4F7] to-66% to-[#e3cafc] transition-all duration-500 ease-in-out relative`}
+      className={`w-full rounded-[20px] bg-gradient-to-r from-34% from-[#F3F4F7] to-66% to-[#e3cafc] transition-all duration-500 ease-in-out relative`}
       style={{ height: getHeight() }}
     >
       <div
-        className={`rounded-[18px] h-full`}
+        className={`rounded-[20px] h-full`}
         style={{
           width: `${getWidthPercentage()}%`,
           background: "linear-gradient(to right, #a655f6 0%, #681bb5 100%)",
@@ -58,14 +58,13 @@ const Progress = ({
         }}
       ></div>
       <div
-        className={`absolute top-0.5 left-0.5 rounded-[18px] h-full ease-in-out ${
+        className={`absolute top-0 left-0 rounded-[20px] h-full ease-in-out ${
           animationPhase === "middle" ? "animate-gradient-move" : ""
         }`}
         style={{
-          width: `calc(${getWidthPercentage()}% - 2px)`,
+          width: `${getWidthPercentage()}%`,
           background: "linear-gradient(to right, #a655f6 0%, #8C25F4 100%)",
           opacity: animationPhase ? 1 : 0,
-          height: "36px",
           transition:
             "width 1500ms cubic-bezier(0.4, 0, 0.2, 1), opacity 500ms ease-in-out",
         }}

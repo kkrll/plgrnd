@@ -46,11 +46,11 @@ const Progress = ({
 
   return (
     <div
-      className={`w-full p-0.5 rounded-[20px] bg-gradient-to-r from-34% from-[#F3F4F7] to-66% to-[#e3cafc] transition-all duration-500 ease-in-out relative`}
+      className={`w-full rounded-[20px] bg-gradient-to-r from-34% from-[#F3F4F7] to-66% to-[#e3cafc] transition-all duration-500 ease-in-out relative`}
       style={{ height: getHeight() }}
     >
       <div
-        className="bg-gradient-to-r from-[#a655f6] to-[#681bb5] rounded-[18px] h-full transition-all duration-[1500ms] ease-in-out"
+        className="bg-gradient-to-r from-[#a655f6] to-[#681bb5] rounded-[20px] h-full transition-all duration-[1500ms] ease-in-out"
         style={{
           width: `${getWidthPercentage()}%`,
           backgroundPosition: "50% 200%",
