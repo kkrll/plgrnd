@@ -4,6 +4,8 @@ import Image from "next/image";
 import Progress from "./progress";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Lottie from "lottie-react";
+import purpleStarsAnimation from "@/../../public/personalisation/Purple Stars.json";
 
 type AnimationPhase = null | "start" | "middle" | "end";
 
@@ -146,11 +148,15 @@ export default function Personalisation() {
           <div className="content-stretch flex gap-[24px] items-start relative shrink-0 w-full min-h-[24px]">
             {/* With Spinner */}
             {animationPhase === "middle" && (
-              <div className="absolute inset-0 flex gap-[8px] items-center animate-fade-in">
-                {/* Loading Spinner */}
+              <div className="absolute inset-0 flex gap-[4px] items-center animate-fade-in">
+                {/* Loading Animation */}
                 <div className="inline-grid place-items-start relative shrink-0">
                   <div className="flex items-center justify-center ml-0 mt-0 relative size-[24px]">
-                    <div className="relative rounded-[22px] size-[24px] border-[3px] border-[#681bb5] border-solid animate-spin border-t-transparent" />
+                    <Lottie
+                      animationData={purpleStarsAnimation}
+                      loop={true}
+                      className="size-[24px]"
+                    />
                   </div>
                 </div>
                 <div className="basis-0 font-semibold grow min-h-px min-w-px not-italic relative shrink-0 text-[16px] text-black tracking-[-0.0496px]">
@@ -162,11 +168,15 @@ export default function Personalisation() {
             )}
 
             {animationPhase === "end" && (
-              <div className="absolute inset-0 flex gap-[8px] items-center animate-fade-out-text">
-                {/* Loading Spinner */}
+              <div className="absolute inset-0 flex gap-[4px] items-center animate-fade-out-text">
+                {/* Loading Animation */}
                 <div className="inline-grid place-items-start relative shrink-0">
                   <div className="flex items-center justify-center ml-0 mt-0 relative size-[24px]">
-                    <div className="relative rounded-[22px] size-[24px] border-[3px] border-[#681bb5] border-solid animate-spin border-t-transparent" />
+                    <Lottie
+                      animationData={purpleStarsAnimation}
+                      loop={true}
+                      className="size-[24px]"
+                    />
                   </div>
                 </div>
                 <div className="basis-0 font-semibold grow min-h-px min-w-px not-italic relative shrink-0 text-[16px] text-black tracking-[-0.0496px]">
@@ -217,6 +227,11 @@ export default function Personalisation() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Bottom Button */}
+      <div className="absolute bottom-0 left-0 w-full  p-8">
+        {/* Button */}
         <div className="w-full flex flex-col gap-2 items-start">
           <p className="text-black">Workouts done:</p>
           <div className="flex gap-2 w-full">
@@ -238,27 +253,8 @@ export default function Personalisation() {
             href="/personalisation"
             className={`px-4 py-2 w-full bg-black rounded-xl text-white text-center block`}
           >
-            variant 1
+            variant B
           </Link>
-        </div>
-      </div>
-
-      {/* Bottom Button */}
-      <div className="absolute bottom-0 h-[94px] left-0 w-full max-w-[390px]">
-        <div className="absolute bottom-0 left-0 right-0">
-          {/* Home Indicator */}
-          <div className="absolute bottom-0 h-[66px] left-0 right-0">
-            <div className="absolute bottom-[8px] left-1/2 transform -translate-x-1/2 w-[134px] h-[5px] bg-black rounded-full" />
-          </div>
-
-          {/* Button */}
-          <div className="absolute bg-black bottom-[40px] box-border content-stretch flex flex-col gap-[16px] items-center left-[6.15%] px-[24px] py-[16px] right-[6.15%] rounded-[16px] cursor-pointer hover:bg-gray-900 transition-colors">
-            <div className="content-stretch flex gap-[10px] items-center relative shrink-0">
-              <div className="flex flex-col font-semibold justify-center leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white tracking-[-0.0496px]">
-                <p className="leading-[22px] whitespace-pre">Got It</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
