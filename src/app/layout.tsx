@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-// import { Outfit } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 
-// const outfit = Outfit({
-//   subsets: ["latin"],
-//   weight: "400",
-// });
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  variable: "--font-outfit",
+});
 
 export const metadata: Metadata = {
   title: "plgrnd",
@@ -19,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={outfit.className}>{children}</body>
     </html>
   );
 }
