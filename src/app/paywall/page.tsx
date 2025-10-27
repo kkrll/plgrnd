@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import PromoCodeBanner from "./PromoCodeBanner";
+import PromoCodeBannerShader from "./PromoCodeBannerShader";
 
 const STOPS = [
   { value: 10, image: "/Target/1.png" },
@@ -11,8 +13,43 @@ const STOPS = [
   { value: 90, image: "/Target/5.png" },
 ];
 
+const AUTOPLAY_INTERVAL = 2000; // 2 seconds
+const USER_PAUSE_DURATION = 20000; // 20 seconds
+
 const PaywallPage = () => {
   const [activeStop, setActiveStop] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Autoplay functionality
+  useEffect(() => {
+    if (!isPaused) {
+      autoplayTimerRef.current = setInterval(() => {
+        setActiveStop((prev) => (prev + 1) % STOPS.length);
+      }, AUTOPLAY_INTERVAL);
+    }
+
+    return () => {
+      if (autoplayTimerRef.current) {
+        clearInterval(autoplayTimerRef.current);
+      }
+    };
+  }, [isPaused]);
+
+  const handleUserInteraction = () => {
+    setIsPaused(true);
+
+    // Clear existing pause timer
+    if (pauseTimerRef.current) {
+      clearTimeout(pauseTimerRef.current);
+    }
+
+    // Resume autoplay after 20 seconds
+    pauseTimerRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, USER_PAUSE_DURATION);
+  };
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -22,10 +59,16 @@ const PaywallPage = () => {
     );
     const stopIndex = STOPS.findIndex((stop) => stop.value === nearest.value);
     setActiveStop(stopIndex);
+    handleUserInteraction();
+  };
+
+  const handleStopClick = (index: number) => {
+    setActiveStop(index);
+    handleUserInteraction();
   };
 
   return (
-    <div className="bg-black min-h-screen text-white relative">
+    <div className="bg-black min-h-screen text-white relative pb-10">
       {/* Hero Background */}
       <div className="absolute top-0 left-0 right-0 h-[434px] overflow-hidden">
         <Image
@@ -37,10 +80,10 @@ const PaywallPage = () => {
       </div>
 
       {/* Header */}
-      <div className="px-6 pt-10 relative z-10">
+      <div className="px-6 pt-6 relative z-10">
         <h1 className="text-[32px] font-semibold leading-[1.25] text-center w-full">
           Let&apos;s reach your goal
-          <p className="text-[#CBFF5B] text-center w-full">
+          <p className="text-[#C490F9] text-center w-full">
             First week&apos;s on us
           </p>
         </h1>
@@ -68,16 +111,23 @@ const PaywallPage = () => {
               {STOPS.map((stop, i) => (
                 <button
                   key={i}
-                  onClick={() => setActiveStop(i)}
+                  onClick={() => handleStopClick(i)}
                   className="w-full h-full flex justify-center items-center rounded-full bg-white/24 hover:bg-white/50 transition-colors z-20 relative"
                 >
-                  <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none">
-                    <circle
-                      cx="8"
-                      cy="8"
-                      r="2"
-                      fill="white"
-                      fillOpacity="0.24"
+                  <svg
+                    width="8"
+                    height="12"
+                    viewBox="0 0 16 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2 2L12 12L2 22"
+                      stroke="white"
+                      strokeOpacity="0.24"
+                      stroke-width="4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
                     />
                   </svg>
                 </button>
@@ -102,9 +152,9 @@ const PaywallPage = () => {
         </div>
 
         {/* Labels */}
-        <div className="flex justify-between mt-4 text-[12px] uppercase font-semibold">
+        <div className="flex justify-between mt-4 text-[12px] uppercase font-semibold px-4">
           <span className="w-[96px]">Today</span>
-          <span>Your fitness journey</span>
+          <span>Your journey</span>
           <span className="w-[96px] text-end">Goal</span>
         </div>
         <p className="text-[#797f91] text-[12px] text-center mt-1">
@@ -115,7 +165,7 @@ const PaywallPage = () => {
       {/* AI-Optimized Plan Section */}
       <div className="px-6 mt-6">
         <div className="bg-[#24262b] rounded-3xl px-6 pb-6 pt-4">
-          <p className="text-[#CBFF5B] text-[12px] uppercase font-semibold mb-6">
+          <p className="text-[#C490F9] text-[12px] w-full text-center uppercase font-semibold mb-6">
             Your AI-Optimized Plan
           </p>
 
@@ -227,6 +277,11 @@ const PaywallPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Promo Code Banner */}
+      <PromoCodeBanner />
+
+      <PromoCodeBannerShader />
     </div>
   );
 };
