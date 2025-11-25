@@ -29,7 +29,7 @@ export default function PromoCodeBanner() {
   const { mins, secs } = formatTime(timeRemaining);
 
   return (
-    <div className="relative z-20 mx-4 mt-4 text-[#061338]">
+    <div className="relative z-20 mx-6 mt-4 ">
       <div className="relative bg-gradient-to-r from-[#1e3a8a] via-[#5b21b6] to-[#6b21a8] rounded-2xl py-4 overflow-hidden">
         {/* Background Layer */}
         <div className="absolute inset-0 z-0">
@@ -80,7 +80,7 @@ export default function PromoCodeBanner() {
           </div>
 
           <div className="flex items-center justify-between gap-2 px-4">
-            <div className="bg-white border-2 border-[#E3CAFC]  w-full rounded-2xl px-6 py-3 flex items-center gap-3">
+            <div className="bg-white/10 border-2 border-[#E3CAFC]  w-full rounded-2xl px-6 py-3 flex items-center gap-3">
               <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                 <path
                   fillRule="evenodd"

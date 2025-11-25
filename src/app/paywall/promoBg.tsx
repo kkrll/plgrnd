@@ -10,7 +10,7 @@ export default function MeshGradient() {
   return (
     <MeshGradient1
       speed={0.75}
-      colors={["#EBF1FF", "#b9c9fcff", "#f0f2faff", "#D9B8FF"]}
+      colors={["#08298dff", "#23093D", "#051443ff", "#5177EB"]}
       distortion={0.36}
       swirl={0.27}
       style={{ height: "320px", width: "480px" }}

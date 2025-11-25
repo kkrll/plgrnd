@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import PromoCodeBanner from "./PromoCodeBanner";
 import PromoCodeBannerShader from "./PromoCodeBannerShader";
+import Card from "./card";
 
 const STOPS = [
   { value: 10, image: "/Target/1.png" },
@@ -15,12 +16,20 @@ const STOPS = [
 
 const AUTOPLAY_INTERVAL = 2000; // 2 seconds
 const USER_PAUSE_DURATION = 20000; // 20 seconds
+const PLANS = [
+  { title: "Monthly", price: "$9.99/month" },
+  { title: "Quarterly", price: "$7.99/month" },
+  { title: "Yearly", price: "$4.99/month" },
+];
 
 const PaywallPage = () => {
   const [activeStop, setActiveStop] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
   const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [dark, setDark] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<string>("Yearly");
+  const [bgSelected, setBgSelected] = useState<boolean>(false);
 
   // Autoplay functionality
   useEffect(() => {
@@ -279,9 +288,60 @@ const PaywallPage = () => {
       </div>
 
       {/* Promo Code Banner */}
-      <PromoCodeBanner />
-
-      <PromoCodeBannerShader />
+      <div className="flex gap-2 px-6 mt-6">
+        <button
+          className={`w-full rounded-3xl ${
+            dark ? "bg-white text-black" : "bg-black text-white"
+          }`}
+          onClick={() => {
+            setDark(true);
+          }}
+        >
+          dark
+        </button>{" "}
+        <button
+          className={`w-full rounded-3xl ${
+            dark ? "bg-black text-white" : "bg-white text-black"
+          }`}
+          onClick={() => {
+            setDark(false);
+          }}
+        >
+          light
+        </button>
+      </div>
+      {dark ? <PromoCodeBanner /> : <PromoCodeBannerShader />}
+      <section>
+        <div className="flex flex-col gap-2 p-6">
+          {PLANS.map((plan) => (
+            <Card
+              key={plan.title}
+              title={plan.title}
+              price={plan.price}
+              isSelected={selectedPlan === plan.title}
+              onClick={() => setSelectedPlan(plan.title)}
+              isPromoted={plan.title === "Yearly"}
+            />
+          ))}
+        </div>
+      </section>
+      <div className="px-6">
+        <button
+          className={`h-[480px] w-full transition-colors duration-300 relative overflow-hidden rounded-xl ${
+            bgSelected ? "bg-[#061338]" : "bg-black"
+          }`}
+          onClick={() => setBgSelected(!bgSelected)}
+        >
+          <Image
+            src="/pro-bg.png"
+            alt="Checkout"
+            fill
+            className={`object-cover transition-all duration-300 ${
+              bgSelected ? "opacity-100" : "opacity-80 translate-y-16"
+            }`}
+          />
+        </button>
+      </div>
     </div>
   );
 };

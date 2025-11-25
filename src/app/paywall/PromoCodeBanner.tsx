@@ -28,7 +28,7 @@ export default function PromoCodeBanner() {
   const { mins, secs } = formatTime(timeRemaining);
 
   return (
-    <div className="relative z-20 mx-4 mt-4">
+    <div className="relative z-20 mx-6 mt-4">
       <div className="bg-gradient-to-r from-[#1e3a8a] via-[#5b21b6] to-[#6b21a8] rounded-2xl py-4 relative overflow-hidden">
         {/* Content */}
         <div className="flex flex-col gap-1">
