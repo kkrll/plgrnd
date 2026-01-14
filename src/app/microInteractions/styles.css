@@ -1,0 +1,160 @@
+.bottom-thing {
+  position: fixed;
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  bottom: 0;
+  left: 16px;
+  right: 16px;
+  width: calc(100% - 32px);
+  height: 100px;
+  border-radius: 16px 16px 0 0;
+  background-color: black;
+  border: 1px solid #1a4ce5;
+  border-bottom: none;
+  overflow: hidden;
+}
+
+.animate-in {
+  animation: slideUp 0.3s ease-in-out forwards;
+}
+.animate-in::after {
+  animation: left-to-right 1s ease-in-out forwards;
+}
+.animate-in p,
+.animate-in span {
+  animation: slideUpDelayed 1s ease-in-out forwards;
+}
+
+.animate-out {
+  animation: slideDown 0.2s ease-in-out forwards;
+}
+
+.bottom-thing::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300%;
+  background-color: #061338;
+  z-index: 0;
+}
+
+.bottom-thing p,
+span {
+  position: relative;
+  z-index: 1;
+}
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideUpDelayed {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  60% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes left-to-right {
+  0% {
+    transform: translateY(-100%) scale(0);
+    border-radius: 100%;
+  }
+  20% {
+    transform: translateY(-100%) scale(0);
+    border-radius: 100%;
+  }
+  80% {
+    transform: translateY(0) scale(1);
+    border-radius: 0%;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+@keyframes right-to-left {
+  0% {
+    transform: translateY(0) scale(1);
+    border-radius: 0%;
+  }
+  100% {
+    transform: translateY(-100%) scale(0);
+    border-radius: 100%;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+button[class*="animate-in"] {
+  animation: buttonPopIn 0.4s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+button[class*="animate-out"] {
+  animation: buttonPopOut 0.2s ease-in-out forwards;
+}
+
+@keyframes buttonPopIn {
+  0% {
+    opacity: 0;
+    transform: translateY(100%) scale(0.8);
+  }
+  60% {
+    transform: translateY(-2%) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes buttonPopOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%) scale(0.8);
+    pointer-events: none;
+  }
+}

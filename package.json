@@ -9,9 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@paper-design/shaders-react": "^0.0.52",
+    "@paper-design/shaders-react": "^0.0.68",
     "lottie-react": "^2.4.1",
     "next": "14.2.4",
+    "qr-code-styling": "^1.9.2",
     "react": "^18",
     "react-dom": "^18",
     "recharts": "^2.15.1"
