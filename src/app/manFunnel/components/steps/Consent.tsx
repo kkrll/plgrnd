@@ -11,19 +11,19 @@ export default function NameStep() {
       <div
         className="fixed bottom-0 left-0 right-0 w-full h-full -z-10 bg-cover bg-center"
         style={{
-          backgroundImage: `url(/man-funnel/feedback-early/bg.png)`,
+          backgroundImage: `url(/man-funnel/consent/bg.png)`,
         }}
       />
 
-      <div className="flex flex-1 flex-col justify-center items-center">
+      <div className="flex flex-1 flex-col items-center mt-24">
         <h2 className="text-center mb-6">
-          {funnelData.name},{" "}
-          <span className="text-blue-300">over 500 000 men</span> in{" "}
-          <span className="text-blue-300">their 40s</span> have already tried{" "}
-          <br />
-          Zing AI Coach.
+          {funnelData.name},ready for your{" "}
+          <span className="text-blue-300">personalized Zing plan</span>?
         </h2>
-        <h2 className=" mb-6">Now it’s your turn.</h2>
+        <p className=" mb-6">
+          Tell us about your BMI, activity level, and daily habits — so we can
+          personalize your workouts.
+        </p>
       </div>
 
       <Button
@@ -32,7 +32,7 @@ export default function NameStep() {
           nextStep();
         }}
       >
-        I Want to Try
+        I Consent
       </Button>
     </section>
   );

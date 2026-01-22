@@ -1,13 +1,14 @@
-'use client';
+"use client";
 
-import { useFunnelContext } from '../context/FunnelContext';
-import FunnelContainer from './FunnelContainer';
-import AgeStep from './steps/AgeStep';
-import GenderStep from './steps/GenderStep';
-import NameStep from './steps/NameStep';
-import FeedbackEarly from './steps/FeedbackEarly';
-import GoalsStep from './steps/GoalsStep';
-import GoalDetailStep from './steps/GoalDetailStep';
+import { useFunnelContext } from "../context/FunnelContext";
+import FunnelContainer from "./FunnelContainer";
+import AgeStep from "./steps/AgeStep";
+import GenderStep from "./steps/GenderStep";
+import NameStep from "./steps/NameStep";
+import FeedbackEarly from "./steps/FeedbackEarly";
+import GoalsStep from "./steps/GoalsStep";
+import GoalDetailStep from "./steps/GoalDetailStep";
+import Consent from "./steps/Consent";
 
 export default function FunnelRouter() {
   const {
@@ -21,17 +22,19 @@ export default function FunnelRouter() {
 
   const renderStep = () => {
     switch (currentStep) {
-      case 'age':
+      case "age":
         return <AgeStep />;
-      case 'gender':
+      case "gender":
         return <GenderStep />;
-      case 'name':
+      case "name":
         return <NameStep />;
-      case 'feedback-early':
+      case "feedback-early":
         return <FeedbackEarly />;
-      case 'goals':
+      case "consent":
+        return <Consent />;
+      case "goals":
         return <GoalsStep />;
-      case 'goal-detail':
+      case "goal-detail":
         return <GoalDetailStep />;
       default:
         return <AgeStep />;
