@@ -1,0 +1,40 @@
+h1, h2, h3 {
+    text-wrap: balance;
+}
+
+h1 {
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 40px; /* 125% */
+    letter-spacing: 0.131px;
+}
+
+h2 {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px; /* 133.333% */
+    letter-spacing: 0.017px;
+}
+
+p {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 22px; /* 137.5% */
+    letter-spacing: -0.05px;
+}
+
+* {
+    corner-shape: superellipse(1.333);
+}
+
+.pressable {
+    transition: all;
+    transition-duration: 100ms;
+}
+
+.pressable:active {
+    transform: scale(0.98);
+}

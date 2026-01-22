@@ -136,3 +136,34 @@ body {
     background-size: 300% 100%;
     animation: gradient-move 1500ms linear;
 }
+
+/* Funnel sliding transitions */
+@keyframes slide-in-forward {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-backward {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-in-forward {
+    animation: slide-in-forward 300ms ease-in-out forwards;
+}
+
+.animate-slide-in-backward {
+    animation: slide-in-backward 300ms ease-in-out forwards;
+}
