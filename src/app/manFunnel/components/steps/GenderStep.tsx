@@ -3,8 +3,8 @@
 import { useFunnelContext } from '../../context/FunnelContext';
 
 const genders = [
-  { id: 'male' as const, label: 'Male', image: '/man-funnel/gender/male.png' },
-  { id: 'female' as const, label: 'Female', image: '/man-funnel/gender/female.png' },
+  { id: 'male' as const, label: 'Male', image: '/man-funnel/gender-step/male.png' },
+  { id: 'female' as const, label: 'Female', image: '/man-funnel/gender-step/female.png' },
 ];
 
 export default function GenderStep() {
@@ -28,7 +28,7 @@ export default function GenderStep() {
         Who are we building the custom plan for?
       </h2>
       <p className="mb-8">
-        Some aspects of your plan adapt based on gender-specific physiology
+        Some aspects of your plan adapt based <br/> on gender-specific physiology
       </p>
 
       <div className="flex flex-col gap-4 flex-1">
@@ -46,7 +46,7 @@ export default function GenderStep() {
           >
             <div className="flex flex-col items-center justify-center gap-4 h-full bg-white/10 rounded-[20px] w-36 backdrop-blur">
               <span className="text-white font-semibold text-xl">{gender.label}</span>
-              <div className={`h-8 w-8 flex items-center justify-center rounded-3xl ${
+              <div className={`h-8 w-8 flex items-center justify-center rounded-xl ${
                 gender.id === "male" ? "bg-blue-500" : "bg-tangerine-500"
               }`} >
                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">

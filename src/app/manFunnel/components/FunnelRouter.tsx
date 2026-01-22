@@ -5,6 +5,7 @@ import FunnelContainer from './FunnelContainer';
 import AgeStep from './steps/AgeStep';
 import GenderStep from './steps/GenderStep';
 import NameStep from './steps/NameStep';
+import FeedbackEarly from './steps/FeedbackEarly';
 import GoalsStep from './steps/GoalsStep';
 import GoalDetailStep from './steps/GoalDetailStep';
 
@@ -13,7 +14,8 @@ export default function FunnelRouter() {
     currentStep,
     currentStepIndex,
     currentStepConfig,
-    totalSteps,
+    currentSection,
+    sectionProgress,
     direction,
   } = useFunnelContext();
 
@@ -25,6 +27,8 @@ export default function FunnelRouter() {
         return <GenderStep />;
       case 'name':
         return <NameStep />;
+      case 'feedback-early':
+        return <FeedbackEarly />;
       case 'goals':
         return <GoalsStep />;
       case 'goal-detail':
@@ -38,7 +42,8 @@ export default function FunnelRouter() {
     <FunnelContainer
       currentStep={currentStep}
       currentStepIndex={currentStepIndex}
-      totalSteps={totalSteps}
+      currentSection={currentSection}
+      sectionProgress={sectionProgress}
       showProgressBar={currentStepConfig?.showProgressBar ?? false}
       direction={direction}
     >

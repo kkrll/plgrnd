@@ -1,36 +1,59 @@
 'use client';
 
 interface ProgressBarProps {
-  currentStep: number;
-  totalSteps: number;
+  currentSection: number;
+  sectionProgress: number; // 0-1, progress within current section
 }
 
-export default function ProgressBar({ currentStep, totalSteps }: ProgressBarProps) {
-  const progress = ((currentStep + 1) / totalSteps) * 100;
+export default function ProgressBar({ currentSection, sectionProgress }: ProgressBarProps) {
+  const totalSections = 4;
 
   return (
     <div className="w-full px-4 py-2">
       <div className="flex items-center gap-2">
-        {Array.from({ length: totalSteps }).map((_, index) => {
-          const isActive = index <= currentStep;
-          const isCurrent = index === currentStep;
+        {Array.from({ length: totalSections }).map((_, sectionIndex) => {
+          const isCompleted = sectionIndex < currentSection;
+          const isCurrent = sectionIndex === currentSection;
+          const isUpcoming = sectionIndex > currentSection;
           
           return (
-            <div key={index} className="flex items-center flex-1">
+            <div key={sectionIndex} className="flex items-center flex-1">
               {/* Circle indicator */}
-              <div
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  isActive ? 'bg-green-500' : 'bg-gray-600'
-                } ${isCurrent ? 'ring-2 ring-green-400 ring-offset-2 ring-offset-black' : ''}`}
-              />
+              {isCompleted ? (
+                // Completed section - green circle with checkmark
+                <div className="w-3 h-3 rounded-full bg-green-500 flex items-center justify-center">
+                  <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 4L3 6L7 2" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              ) : isCurrent ? (
+                // Current section - green circle (no checkmark yet)
+                <div className="w-3 h-3 rounded-full bg-green-500" />
+              ) : (
+                // Upcoming section - grey circle
+                <div className="w-3 h-3 rounded-full bg-gray-600" />
+              )}
               
               {/* Connecting line */}
-              {index < totalSteps - 1 && (
-                <div
-                  className={`flex-1 h-0.5 mx-1 transition-all duration-300 ${
-                    index < currentStep ? 'bg-green-500' : 'bg-gray-600'
-                  }`}
-                />
+              {sectionIndex < totalSections - 1 && (
+                <div className="flex-1 h-0.5 mx-1 relative overflow-hidden">
+                  {isCompleted ? (
+                    // Fully completed - green line
+                    <div className="absolute inset-0 bg-green-500" />
+                  ) : isCurrent ? (
+                    // Partially completed - green portion based on progress
+                    <>
+                      <div 
+                        className="absolute inset-0 bg-green-500 transition-all duration-300"
+                        style={{ width: `${sectionProgress * 100}%` }}
+                      />
+                      <div className="absolute inset-0 bg-gray-600" />
+                    </>
+                  ) : (
+                    // Upcoming - grey line
+                    <div className="absolute inset-0 bg-gray-600" />
+                  )}
+                </div>
               )}
             </div>
           );

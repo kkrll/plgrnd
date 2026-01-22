@@ -7,7 +7,8 @@ import ProgressBar from './ProgressBar';
 interface FunnelContainerProps {
   currentStep: FunnelStep;
   currentStepIndex: number;
-  totalSteps: number;
+  currentSection: number;
+  sectionProgress: number;
   showProgressBar: boolean;
   direction: 'forward' | 'backward';
   children: ReactNode;
@@ -16,7 +17,8 @@ interface FunnelContainerProps {
 export default function FunnelContainer({
   currentStep,
   currentStepIndex,
-  totalSteps,
+  currentSection,
+  sectionProgress,
   showProgressBar,
   direction,
   children,
@@ -26,7 +28,7 @@ export default function FunnelContainer({
       {/* Progress Bar */}
       {showProgressBar && (
         <div className="sticky top-0 z-20 bg-black/80 backdrop-blur-sm">
-          <ProgressBar currentStep={currentStepIndex} totalSteps={totalSteps} />
+          <ProgressBar currentSection={currentSection} sectionProgress={sectionProgress} />
         </div>
       )}
 

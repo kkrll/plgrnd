@@ -10,6 +10,12 @@ export function useFunnel() {
 
   const currentStepIndex = FUNNEL_STEPS.findIndex(step => step.id === currentStep);
   const currentStepConfig = FUNNEL_STEPS[currentStepIndex];
+  
+  // Calculate section-based progress
+  const currentSection = currentStepConfig?.section ?? 0;
+  const stepsInCurrentSection = FUNNEL_STEPS.filter(step => step.section === currentSection);
+  const currentStepIndexInSection = stepsInCurrentSection.findIndex(step => step.id === currentStep);
+  const sectionProgress = currentStepIndexInSection / stepsInCurrentSection.length;
 
   const goToStep = useCallback((step: FunnelStep, dir: 'forward' | 'backward' = 'forward') => {
     setDirection(dir);
@@ -36,6 +42,8 @@ export function useFunnel() {
     currentStep,
     currentStepIndex,
     currentStepConfig,
+    currentSection,
+    sectionProgress,
     funnelData,
     direction,
     goToStep,

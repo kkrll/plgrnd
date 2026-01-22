@@ -8,6 +8,8 @@ interface FunnelContextType {
   currentStep: FunnelStep;
   currentStepIndex: number;
   currentStepConfig: ReturnType<typeof useFunnel>['currentStepConfig'];
+  currentSection: number;
+  sectionProgress: number;
   funnelData: FunnelData;
   direction: 'forward' | 'backward';
   goToStep: (step: FunnelStep, dir?: 'forward' | 'backward') => void;
