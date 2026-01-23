@@ -9,6 +9,10 @@ import FeedbackEarly from "./steps/FeedbackEarly";
 import GoalsStep from "./steps/GoalsStep";
 import GoalDetailStep from "./steps/GoalDetailStep";
 import Consent from "./steps/Consent";
+import MotivationStep from "./steps/MotivationStep";
+import BodyTypeStep from "./steps/BodyTypeStep";
+import BodyTypeTargetStep from "./steps/BodyTypeTargetStep";
+import BodyScanStep from "./steps/BodyScan";
 
 export default function FunnelRouter() {
   const {
@@ -36,6 +40,14 @@ export default function FunnelRouter() {
         return <GoalsStep />;
       case "goal-detail":
         return <GoalDetailStep />;
+      case "motivation":
+        return <MotivationStep />;
+      case "body-type":
+        return <BodyTypeStep />;
+      case "body-type-target":
+        return <BodyTypeTargetStep />;
+      case "body-scan":
+        return <BodyScanStep />;
       default:
         return <AgeStep />;
     }

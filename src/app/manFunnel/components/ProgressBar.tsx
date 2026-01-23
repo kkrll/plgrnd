@@ -38,7 +38,7 @@ export default function ProgressBar({ sectionProgress }: ProgressBarProps) {
         </button>
         <div className="flex items-center flex-1">
           {Array.from({ length: totalSections }).map((_, sectionIndex) => {
-            const isCompleted = sectionIndex <= currentSection;
+            const isCompleted = sectionIndex < currentSection;
             const isCurrent = sectionIndex === currentSection;
             const isUpcoming = sectionIndex > currentSection;
 

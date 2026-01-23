@@ -2,6 +2,7 @@
 
 import { useFunnelContext } from "../../context/FunnelContext";
 import Button from "../Button";
+import Logo from "../Logo";
 
 export default function NameStep() {
   const { nextStep, funnelData } = useFunnelContext();
@@ -14,7 +15,7 @@ export default function NameStep() {
           backgroundImage: `url(/man-funnel/feedback-early/bg.png)`,
         }}
       />
-
+      <Logo center />
       <div className="flex flex-1 flex-col justify-center items-center">
         <h2 className="text-center mb-6">
           {funnelData.name},{" "}

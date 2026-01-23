@@ -1,20 +1,26 @@
 "use client";
 
 import { useFunnelContext } from "../../context/FunnelContext";
+import { GoalType } from "../../types";
 
-const goals = [
+type GoalsType = {
+  id: GoalType;
+  label: string;
+  icon: string;
+}[];
+const goals: GoalsType = [
   {
     id: "firmer-body",
     label: "A firmer body",
     icon: "/man-funnel/primary-goal/firmer-body.png",
   },
   {
-    id: "more-muscle",
+    id: "muscle",
     label: "More muscle",
     icon: "/man-funnel/primary-goal/muscle.png",
   },
   {
-    id: "weight-loss",
+    id: "weight",
     label: "Weight loss",
     icon: "/man-funnel/primary-goal/weight.png",
   },
@@ -28,18 +34,18 @@ const goals = [
 export default function GoalsStep() {
   const { updateData, nextStep, previousStep } = useFunnelContext();
 
-  const handleSelect = (goal: string) => {
+  const handleSelect = (goal: GoalType) => {
     updateData({ goal });
     nextStep();
   };
 
   return (
-    <section className="w-full p-6 min-h-screen flex flex-col">
+    <section className="w-full p-6 min-h-screen flex-1 flex flex-col">
       <h2 className="text-2xl font-bold mb-8">
         What is your primary goal today?
       </h2>
 
-      <div className="grid grid-cols-2 gap-4 ">
+      <div className="grid grid-cols-2 gap-2 ">
         {goals.map((goal) => (
           <button
             key={goal.id}

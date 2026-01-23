@@ -1,63 +1,85 @@
-'use client';
+"use client";
 
-import { useFunnelContext } from '../../context/FunnelContext';
+import { useFunnelContext } from "../../context/FunnelContext";
+import { GoalType } from "../../types";
+import Button from "../Button";
 
 export default function GoalDetailStep() {
-  const { funnelData, previousStep } = useFunnelContext();
+  const { funnelData, nextStep } = useFunnelContext();
+  const { goal } = funnelData;
+
+  type GoalContentType = {
+    heading: React.ReactNode;
+    description: string | null;
+    illustration: string;
+    cta: string;
+  };
+
+  const goalContent: Record<GoalType, GoalContentType> = {
+    "firmer-body": {
+      heading: (
+        <>
+          The right balance of{" "}
+          <span className="text-blue-300">
+            training, recovery, and intensity
+          </span>{" "}
+          for a toned body
+        </>
+      ),
+      description: null,
+      illustration: "/man-funnel/stats/firmer-body.png",
+      cta: "Build My Toning Plan",
+    },
+    muscle: {
+      heading: (
+        <>
+          Up to <span className="text-blue-300">35% stronger</span> in the first
+          3 months
+        </>
+      ),
+      description:
+        "Zing helped  559,173 people build  strength with structured, AI-guided workouts",
+      illustration: "/man-funnel/stats/muscle.png",
+      cta: "Build My Strength Plan",
+    },
+    weight: {
+      heading: (
+        <>
+          With Zing's personalized plan, lose up to{" "}
+          <span className="text-blue-300">3x more weight</span>{" "}
+        </>
+      ),
+      description: `You're not alone, we've helped 836,627 people lose weight`,
+      illustration: "/man-funnel/stats/weight.png",
+      cta: "Build My Weight Loss Plan",
+    },
+    "mental-balance": {
+      heading: (
+        <>
+          Zing users feel <span className="text-blue-300">less stressed</span>{" "}
+          and more <span className="text-blue-300">mentally balanced</span> in
+          just 2-3 weeks
+        </>
+      ),
+      description: null,
+      illustration: "/man-funnel/stats/mental-balance.png",
+      cta: "Build My Stress Relief Plan",
+    },
+  };
 
   return (
-    <section className="w-full p-6 min-h-screen flex flex-col">
-      <div className="flex items-center gap-4 mb-6">
-        <button
-          onClick={previousStep}
-          className="text-white text-xl"
-        >
-          ←
-        </button>
-        <h1 className="text-lg font-semibold uppercase">GOALS</h1>
+    <section className="w-full p-6 flex-1 flex flex-col">
+      <div className="flex flex-col flex-1">
+        <h2 className="text-center mb-2">
+          {goal && goalContent[goal]?.heading}
+        </h2>
+        <p className="text-center">{goal && goalContent[goal]?.description}</p>
+        <img src={goal && goalContent[goal]?.illustration} alt="" />
       </div>
 
-      <h2 className="text-3xl font-bold mb-8">
-        The right balance of <span className="text-blue-500">training</span>,{' '}
-        <span className="text-blue-500">recovery</span>, and{' '}
-        <span className="text-blue-500">intensity</span> for a{' '}
-        <span className="text-blue-500">toned body</span>
-      </h2>
-
-      <div className="mb-8">
-        <h3 className="text-xl font-semibold mb-4">BODY TONE AND ENERGY</h3>
-        <div className="relative h-32 bg-gray-900 rounded-lg p-4">
-          <div className="flex items-end justify-between h-full">
-            <span className="text-xs text-gray-400">SOFT LOOK</span>
-            <div className="flex-1 mx-4 relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-gray-700 via-blue-600 to-purple-600 rounded opacity-50" />
-              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-8">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center text-xs font-bold">
-                    A
-                  </div>
-                  <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
-                    👤
-                  </div>
-                </div>
-                <div className="mt-2 text-xs text-blue-400 text-center whitespace-nowrap">
-                  Intelligently optimized activity level
-                </div>
-              </div>
-            </div>
-            <span className="text-xs text-gray-400">BULKY LOOK</span>
-          </div>
-        </div>
-        <p className="text-xs text-gray-500 mt-2">
-          *Illustrative graphic based on Zing user data. Individual results may vary.
-        </p>
-      </div>
-
-      <div className="mt-auto">
-        <button className="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors">
-          Build My Toning Plan
-        </button>
-      </div>
+      <Button onClick={() => nextStep()}>
+        {goal && goalContent[goal]?.cta}
+      </Button>
     </section>
   );
 }

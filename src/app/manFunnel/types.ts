@@ -6,13 +6,20 @@ export type FunnelStep =
   | "feedback-early"
   | "consent"
   | "goals"
-  | "goal-detail";
+  | "goal-detail"
+  | "motivation"
+  | "body-type"
+  | "body-type-target"
+  | "body-scan";
 
 export interface FunnelData {
   age?: string;
   gender?: "male" | "female";
   name?: string;
-  goal?: string;
+  goal?: GoalType;
+  motivations?: string[];
+  bodyType?: string;
+  bodyTypeTarget?: string;
 }
 
 export interface FunnelStepConfig {
@@ -23,6 +30,8 @@ export interface FunnelStepConfig {
   totalSteps: number;
   order: number;
 }
+
+export type GoalType = "firmer-body" | "muscle" | "weight" | "mental-balance";
 
 const GOALS_SECTION_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
   {
@@ -73,6 +82,34 @@ const GOALS_SECTION_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
     showProgressBar: true,
     section: 0,
     order: 6,
+  },
+  {
+    id: "motivation",
+    title: "What's your main motivation to work out?",
+    showProgressBar: true,
+    section: 0,
+    order: 7,
+  },
+  {
+    id: "body-type",
+    title: "What best matches your current body type?",
+    showProgressBar: true,
+    section: 0,
+    order: 8,
+  },
+  {
+    id: "body-type-target",
+    title: "What's your dream body?",
+    showProgressBar: true,
+    section: 0,
+    order: 9,
+  },
+  {
+    id: "body-scan",
+    title: "You can get more precise evaluation with Body Scan",
+    showProgressBar: false,
+    section: 0,
+    order: 10,
   },
 ];
 
