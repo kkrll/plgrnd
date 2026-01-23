@@ -11,7 +11,9 @@ export type FunnelStep =
   | "body-type"
   | "body-type-target"
   | "body-scan"
-  | "focus-muscles";
+  | "focus-muscles"
+  | "fitness-history"
+  | "hard-to-lose";
 
 export interface FunnelData {
   age?: string;
@@ -22,6 +24,8 @@ export interface FunnelData {
   bodyType?: string;
   bodyTypeTarget?: string;
   focusMuscles?: string[];
+  fitnessHistory?: string;
+  hardToLoseAreas?: string[];
 }
 
 export interface FunnelStepConfig {
@@ -119,6 +123,20 @@ const GOALS_SECTION_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
     showProgressBar: true,
     section: 0,
     order: 11,
+  },
+  {
+    id: "fitness-history",
+    title: "How long ago were you in the best shape of your life?",
+    showProgressBar: true,
+    section: 0,
+    order: 12,
+  },
+  {
+    id: "hard-to-lose",
+    title: "Where is fat hardest to lose?",
+    showProgressBar: true,
+    section: 0,
+    order: 13,
   },
 ];
 

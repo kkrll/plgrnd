@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Button from "./Button";
+import { useDebouncedAction } from "../hooks/useDebouncedAction";
 
 interface FormOption {
   id: string;
@@ -32,25 +33,28 @@ export default function FormOptions({
     return Array.isArray(defaultSelected) ? defaultSelected : [defaultSelected];
   });
 
+  const debouncedAction = useDebouncedAction({ delay: 300 });
   const handleToggle = (id: string) => {
-    if (type === "radio") {
-      // Radio: immediate action
-      onSubmit(id);
-    } else {
-      // Checkbox: toggle selection
-      setSelected((prev) => {
-        const newSelected = prev.includes(id)
-          ? prev.filter((s) => s !== id)
-          : [...prev, id];
-        
-        // Notify parent of selection change
-        if (onSelectionChange) {
-          onSelectionChange(newSelected);
-        }
-        
-        return newSelected;
-      });
-    }
+    debouncedAction(() => {
+      if (type === "radio") {
+        // Radio: immediate action
+        onSubmit(id);
+      } else {
+        // Checkbox: toggle selection
+        setSelected((prev) => {
+          const newSelected = prev.includes(id)
+            ? prev.filter((s) => s !== id)
+            : [...prev, id];
+
+          // Notify parent of selection change
+          if (onSelectionChange) {
+            onSelectionChange(newSelected);
+          }
+
+          return newSelected;
+        });
+      }
+    });
   };
 
   const handleSubmit = () => {
@@ -85,7 +89,7 @@ export default function FormOptions({
             <span className="text-white font-medium flex-1 text-left">
               {option.label}
             </span>
-            {!option.image && (
+            {type === "checkbox" && (
               <div
                 className={`w-6 h-6 rounded-lg bg-grey-900 border flex items-center justify-center transition-all ${isSelected(option.id)
                   ? "border-transparent"

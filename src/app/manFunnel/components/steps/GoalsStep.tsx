@@ -1,6 +1,7 @@
 "use client";
 
 import { useFunnelContext } from "../../context/FunnelContext";
+import { useDebouncedAction } from "../../hooks/useDebouncedAction";
 import { GoalType } from "../../types";
 
 type GoalsType = {
@@ -34,9 +35,11 @@ const goals: GoalsType = [
 export default function GoalsStep() {
   const { updateData, nextStep, previousStep } = useFunnelContext();
 
+  const debouncedAction = useDebouncedAction({ delay: 300 });
+
   const handleSelect = (goal: GoalType) => {
     updateData({ goal });
-    nextStep();
+    debouncedAction(nextStep);
   };
 
   return (
@@ -49,7 +52,7 @@ export default function GoalsStep() {
         {goals.map((goal) => (
           <button
             key={goal.id}
-            onClick={() => handleSelect(goal.id)}
+            onMouseUp={() => handleSelect(goal.id)}
             className="pressable relative group rounded-2xl overflow-hidden border border-blue-500/50 hover:border-blue-500 transition-all p-6 flex flex-col items-center justify-center gap-3"
             style={{
               backgroundImage: `url(/man-funnel/primary-goal/bg.png)`,

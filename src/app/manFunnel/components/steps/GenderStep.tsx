@@ -1,6 +1,7 @@
 'use client';
 
 import { useFunnelContext } from '../../context/FunnelContext';
+import { useDebouncedAction } from '../../hooks/useDebouncedAction';
 
 const genders = [
   { id: 'male' as const, label: 'Male', image: '/man-funnel/gender-step/male.png' },
@@ -10,17 +11,20 @@ const genders = [
 export default function GenderStep() {
   const { updateData, nextStep } = useFunnelContext();
 
+
+  const debouncedAction = useDebouncedAction({ delay: 300 });
+
   const handleSelect = (gender: 'male' | 'female') => {
     updateData({ gender });
-    nextStep();
+    debouncedAction(nextStep);
   };
 
   return (
     <section className="w-full p-6 min-h-screen flex flex-col">
       <div className="mb-4">
-        <img 
-          src="/man-funnel/logo.svg" 
-          alt="Logo" 
+        <img
+          src="/man-funnel/logo.svg"
+          alt="Logo"
           className="h-12 w-auto"
         />
       </div>
@@ -28,14 +32,14 @@ export default function GenderStep() {
         Who are we building the custom plan for?
       </h2>
       <p className="mb-8">
-        Some aspects of your plan adapt based <br/> on gender-specific physiology
+        Some aspects of your plan adapt based <br /> on gender-specific physiology
       </p>
 
       <div className="flex flex-col gap-4 flex-1">
         {genders.map((gender) => (
           <button
             key={gender.id}
-            onClick={() => handleSelect(gender.id)}
+            onMouseUp={() => handleSelect(gender.id)}
             style={{
               backgroundImage: `url(${gender.image})`,
               backgroundSize: 'cover',
@@ -46,11 +50,10 @@ export default function GenderStep() {
           >
             <div className="flex flex-col items-center justify-center gap-4 h-full bg-white/10 rounded-[20px] w-36 backdrop-blur">
               <span className="text-white font-semibold text-xl">{gender.label}</span>
-              <div className={`h-8 w-8 flex items-center justify-center rounded-xl ${
-                gender.id === "male" ? "bg-blue-500" : "bg-tangerine-500"
-              }`} >
+              <div className={`h-8 w-8 flex items-center justify-center rounded-xl ${gender.id === "male" ? "bg-blue-500" : "bg-tangerine-500"
+                }`} >
                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9.33333 13.3346L14.6667 8.0013M9.33333 2.66797L14.6667 8.0013M14.6667 8.0013L1.33333 8.0013" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M9.33333 13.3346L14.6667 8.0013M9.33333 2.66797L14.6667 8.0013M14.6667 8.0013L1.33333 8.0013" stroke="white" stroke-width="2" stroke-linecap="round" />
                 </svg>
               </div>
             </div>

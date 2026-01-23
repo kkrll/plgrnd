@@ -1,6 +1,7 @@
 "use client";
 
 import { useFunnelContext } from "../../context/FunnelContext";
+import { useDebouncedAction } from "../../hooks/useDebouncedAction";
 
 const ageGroups = [
   { id: "18-29", label: "Age: 18-29", image: "/man-funnel/age-screen/20s.png" },
@@ -12,9 +13,11 @@ const ageGroups = [
 export default function AgeStep() {
   const { updateData, nextStep } = useFunnelContext();
 
+  const debouncedAction = useDebouncedAction({ delay: 300 });
+
   const handleSelect = (ageGroup: string) => {
     updateData({ age: ageGroup });
-    nextStep();
+    debouncedAction(nextStep);
   };
 
   return (
@@ -26,11 +29,11 @@ export default function AgeStep() {
       <h1 className="mb-2">Get a Personalized Workout Plan</h1>
       <p className="mb-8">Select your age group:</p>
 
-      <div className="grid grid-cols-2 gap-4 ">
+      <div className="grid grid-cols-2 gap-2 ">
         {ageGroups.map((group) => (
           <button
             key={group.id}
-            onClick={() => handleSelect(group.id)}
+            onMouseUp={() => handleSelect(group.id)}
             className="relative group rounded-3xl h-48 overflow-hidden border border-transparent hover:border-blue-500 transition-all pressable"
           >
             <img

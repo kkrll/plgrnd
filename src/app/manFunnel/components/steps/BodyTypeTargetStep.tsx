@@ -1,6 +1,7 @@
 "use client";
 
 import { useFunnelContext } from "../../context/FunnelContext";
+import { useDebouncedAction } from "../../hooks/useDebouncedAction";
 
 const targetBodyTypes = [
   { id: "lean", label: "Lean", image: "/man-funnel/body-type-target/lean.png" },
@@ -12,9 +13,11 @@ const targetBodyTypes = [
 export default function BodyTypeTargetStep() {
   const { updateData, nextStep, funnelData } = useFunnelContext();
 
+  const debouncedAction = useDebouncedAction({ delay: 300 });
+
   const handleSelect = (bodyTypeTarget: string) => {
     updateData({ bodyTypeTarget });
-    nextStep();
+    debouncedAction(nextStep);
   };
 
   return (
@@ -26,7 +29,7 @@ export default function BodyTypeTargetStep() {
         {targetBodyTypes.map((type) => (
           <button
             key={type.id}
-            onClick={() => handleSelect(type.id)}
+            onMouseUp={() => handleSelect(type.id)}
             className="relative group flex flex-col rounded-3xl h-48 bg-grey-800 overflow-hidden border border-transparent hover:border-blue-500 transition-all pressable"
           >
             <div className="flex-1 w-full overflow-hidden">
