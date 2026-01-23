@@ -10,7 +10,8 @@ export type FunnelStep =
   | "motivation"
   | "body-type"
   | "body-type-target"
-  | "body-scan";
+  | "body-scan"
+  | "focus-muscles";
 
 export interface FunnelData {
   age?: string;
@@ -20,6 +21,7 @@ export interface FunnelData {
   motivations?: string[];
   bodyType?: string;
   bodyTypeTarget?: string;
+  focusMuscles?: string[];
 }
 
 export interface FunnelStepConfig {
@@ -110,6 +112,13 @@ const GOALS_SECTION_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
     showProgressBar: false,
     section: 0,
     order: 10,
+  },
+  {
+    id: "focus-muscles",
+    title: "What's your current muscle-building goal?",
+    showProgressBar: true,
+    section: 0,
+    order: 11,
   },
 ];
 

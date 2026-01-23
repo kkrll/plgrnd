@@ -13,6 +13,7 @@ import MotivationStep from "./steps/MotivationStep";
 import BodyTypeStep from "./steps/BodyTypeStep";
 import BodyTypeTargetStep from "./steps/BodyTypeTargetStep";
 import BodyScanStep from "./steps/BodyScan";
+import FocusMuscles from "./steps/FocusMuscles";
 
 export default function FunnelRouter() {
   const {
@@ -48,6 +49,8 @@ export default function FunnelRouter() {
         return <BodyTypeTargetStep />;
       case "body-scan":
         return <BodyScanStep />;
+      case "focus-muscles":
+        return <FocusMuscles />;
       default:
         return <AgeStep />;
     }

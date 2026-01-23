@@ -15,6 +15,8 @@ interface FormOptionsProps {
   type: "radio" | "checkbox";
   onSubmit: (selected: string | string[]) => void;
   defaultSelected?: string | string[];
+  narrow?: boolean;
+  onSelectionChange?: (selected: string | string[]) => void;
 }
 
 export default function FormOptions({
@@ -22,6 +24,8 @@ export default function FormOptions({
   type,
   onSubmit,
   defaultSelected,
+  narrow = false,
+  onSelectionChange,
 }: FormOptionsProps) {
   const [selected, setSelected] = useState<string[]>(() => {
     if (!defaultSelected) return [];
@@ -34,9 +38,18 @@ export default function FormOptions({
       onSubmit(id);
     } else {
       // Checkbox: toggle selection
-      setSelected((prev) =>
-        prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id],
-      );
+      setSelected((prev) => {
+        const newSelected = prev.includes(id)
+          ? prev.filter((s) => s !== id)
+          : [...prev, id];
+        
+        // Notify parent of selection change
+        if (onSelectionChange) {
+          onSelectionChange(newSelected);
+        }
+        
+        return newSelected;
+      });
     }
   };
 
@@ -50,16 +63,14 @@ export default function FormOptions({
 
   return (
     <div className="w-full flex flex-col flex-1">
-      <div className="flex flex-col gap-2 mb-6 flex-1">
+      <div className={`flex flex-col gap-2 mb-6 flex-1 ${narrow ? "max-w-[60%]" : ""}`}>
         {options.map((option) => (
           <button
             key={option.id}
             onClick={() => handleToggle(option.id)}
-            className={`pressable relative flex items-center ${
-              option.image ? "justify-start gap-4" : "justify-between"
-            }  transition-all  ${
-              isSelected(option.id) ? "bg-blue-500" : "bg-grey-800 "
-            } ${option.image ? "pl-2 py-2 rounded-3xl" : "px-5 py-4 rounded-2xl"}`}
+            className={`pressable relative flex items-center ${option.image ? "justify-start gap-4" : "justify-between"
+              }  transition-all  ${isSelected(option.id) ? "bg-blue-500" : "bg-grey-800 "
+              } ${option.image ? "pl-2 py-2 rounded-3xl" : "px-5 py-4 rounded-2xl"}`}
           >
             {option.image && (
               <div className="relative w-20 h-20 shrink-0 rounded-lg overflow-hidden">
@@ -76,11 +87,10 @@ export default function FormOptions({
             </span>
             {!option.image && (
               <div
-                className={`w-6 h-6 rounded-lg bg-grey-900 border flex items-center justify-center transition-all ${
-                  isSelected(option.id)
-                    ? "border-transparent"
-                    : "border-grey-700"
-                }`}
+                className={`w-6 h-6 rounded-lg bg-grey-900 border flex items-center justify-center transition-all ${isSelected(option.id)
+                  ? "border-transparent"
+                  : "border-grey-700"
+                  }`}
               >
                 {isSelected(option.id) && (
                   <svg
