@@ -5,6 +5,9 @@ export type FunnelStep =
   | "name"
   | "feedback-early"
   | "consent"
+  | "height"
+  | "weight"
+  | "target-weight"
   | "goals"
   | "goal-detail"
   | "motivation"
@@ -14,7 +17,8 @@ export type FunnelStep =
   | "focus-muscles"
   | "fitness-history"
   | "hard-to-lose"
-  | "testimony";
+  | "testimony"
+  | "fitness-level";
 
 export interface FunnelData {
   age?: string;
@@ -25,8 +29,12 @@ export interface FunnelData {
   bodyType?: string;
   bodyTypeTarget?: string;
   focusMuscles?: string[];
-  fitnessHistory?: string;
+  fitnessLevel?: string;
   hardToLoseAreas?: string[];
+  heightCm?: number;
+  weightKg?: number;
+  targetWeightKg?: number;
+  fitnessHistory?: string;
 }
 
 export interface FunnelStepConfig {
@@ -126,8 +134,8 @@ const GOALS_SECTION_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
     order: 11,
   },
   {
-    id: "fitness-history",
-    title: "How long ago were you in the best shape of your life?",
+    id: "fitness-level",
+    title: "How would you describe your training and nutrition?",
     showProgressBar: true,
     section: 0,
     order: 12,
@@ -145,6 +153,34 @@ const GOALS_SECTION_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
     showProgressBar: true,
     section: 0,
     order: 14,
+  },
+  {
+    id: "height",
+    title: "How tall are you?",
+    showProgressBar: true,
+    section: 0,
+    order: 15,
+  },
+  {
+    id: "weight",
+    title: "What's your current weight?",
+    showProgressBar: true,
+    section: 0,
+    order: 16,
+  },
+  {
+    id: "target-weight",
+    title: "What's your target weight?",
+    showProgressBar: true,
+    section: 0,
+    order: 17,
+  },
+  {
+    id: "fitness-history",
+    title: "How long ago were you in the best shape of your life?",
+    showProgressBar: true,
+    section: 0,
+    order: 18,
   },
 ];
 

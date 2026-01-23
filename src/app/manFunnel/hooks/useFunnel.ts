@@ -15,7 +15,7 @@ export function useFunnel() {
   const currentSection = currentStepConfig?.section ?? 0;
   const stepsInCurrentSection = FUNNEL_STEPS.filter(step => step.section === currentSection);
   const currentStepIndexInSection = stepsInCurrentSection.findIndex(step => step.id === currentStep);
-  const sectionProgress = currentStepIndexInSection / stepsInCurrentSection.length;
+  const sectionProgress = currentStepIndexInSection / Math.max(stepsInCurrentSection.length - 1, 1);
 
   const goToStep = useCallback((step: FunnelStep, dir: 'forward' | 'backward' = 'forward') => {
     setDirection(dir);

@@ -9,12 +9,16 @@ import FeedbackEarly from "./steps/FeedbackEarly";
 import GoalsStep from "./steps/GoalsStep";
 import GoalDetailStep from "./steps/GoalDetailStep";
 import Consent from "./steps/Consent";
+import HeightStep from "./steps/HeightStep";
+import WeightStep from "./steps/WeightStep";
+import TargetWeightStep from "./steps/TargetWeightStep";
 import MotivationStep from "./steps/MotivationStep";
 import BodyTypeStep from "./steps/BodyTypeStep";
 import BodyTypeTargetStep from "./steps/BodyTypeTargetStep";
 import BodyScanStep from "./steps/BodyScan";
 import FocusMuscles from "./steps/FocusMuscles";
 import FitnessHistory from "./steps/FitnessHistory";
+import FitnessLevelStep from "./steps/FitnessLevelStep";
 import HardToLose from "./steps/HardToLose";
 import TestimonyStep from "./steps/TestimonyStep";
 
@@ -40,6 +44,12 @@ export default function FunnelRouter() {
         return <FeedbackEarly />;
       case "consent":
         return <Consent />;
+      case "height":
+        return <HeightStep />;
+      case "weight":
+        return <WeightStep />;
+      case "target-weight":
+        return <TargetWeightStep />;
       case "goals":
         return <GoalsStep />;
       case "goal-detail":
@@ -56,6 +66,8 @@ export default function FunnelRouter() {
         return <FocusMuscles />;
       case "fitness-history":
         return <FitnessHistory />;
+      case "fitness-level":
+        return <FitnessLevelStep />;
       case "hard-to-lose":
         return <HardToLose />;
       case "testimony":

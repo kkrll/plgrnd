@@ -10,10 +10,18 @@ export default function ProgressBar({ sectionProgress }: ProgressBarProps) {
   const totalSections = 4;
   const { previousStep, currentSection } = useFunnelContext();
 
+  const sectionTitle =
+    ({
+      0: "GOALS",
+      1: "PERSONAL DETAILS",
+      2: "CALIBRATION",
+      3: "RESULTS",
+    } as const)[currentSection] ?? "ONBOARDING";
+
   return (
     <div className="w-full px-6 py-2">
       {/*add section var*/}
-      <p className="uppercase w-full text-center text-sm my-2">GOALS</p>
+      <p className="uppercase w-full text-center text-sm my-2">{sectionTitle}</p>
       <div className="flex w-full items-center gap-4">
         <button
           onClick={() => {
@@ -31,8 +39,8 @@ export default function ProgressBar({ sectionProgress }: ProgressBarProps) {
             <path
               d="M5.06055 2L1.06055 6M5.06055 10L1.06055 6M1.06055 6H11.0605"
               stroke="white"
-              stroke-width="1.5"
-              stroke-linecap="round"
+              strokeWidth="1.5"
+              strokeLinecap="round"
             />
           </svg>
         </button>
@@ -50,7 +58,23 @@ export default function ProgressBar({ sectionProgress }: ProgressBarProps) {
                 {/* Circle indicator */}
                 {isCompleted ? (
                   // Completed section - green circle with checkmark
-                  <div className="w-3 h-3 rounded-full bg-greenery-500 flex items-center justify-center"></div>
+                  <div className="w-3 h-3 rounded-full bg-greenery-500 flex items-center justify-center">
+                    <svg
+                      width="8"
+                      height="8"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2 6L4.5 8.5L10 3"
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
                 ) : isCurrent ? (
                   // Current section - green circle (no checkmark yet)
                   <div className="w-3 h-3 rounded-full bg-greenery-500" />
