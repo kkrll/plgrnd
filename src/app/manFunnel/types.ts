@@ -13,7 +13,8 @@ export type FunnelStep =
   | "body-scan"
   | "focus-muscles"
   | "fitness-history"
-  | "hard-to-lose";
+  | "hard-to-lose"
+  | "testimony";
 
 export interface FunnelData {
   age?: string;
@@ -137,6 +138,13 @@ const GOALS_SECTION_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
     showProgressBar: true,
     section: 0,
     order: 13,
+  },
+  {
+    id: "testimony",
+    title: "Success Story",
+    showProgressBar: true,
+    section: 0,
+    order: 14,
   },
 ];
 

@@ -16,6 +16,7 @@ import BodyScanStep from "./steps/BodyScan";
 import FocusMuscles from "./steps/FocusMuscles";
 import FitnessHistory from "./steps/FitnessHistory";
 import HardToLose from "./steps/HardToLose";
+import TestimonyStep from "./steps/TestimonyStep";
 
 export default function FunnelRouter() {
   const {
@@ -57,6 +58,8 @@ export default function FunnelRouter() {
         return <FitnessHistory />;
       case "hard-to-lose":
         return <HardToLose />;
+      case "testimony":
+        return <TestimonyStep />;
       default:
         return <AgeStep />;
     }

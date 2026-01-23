@@ -65,14 +65,14 @@ export default function FocusMuscles() {
   };
 
   return (
-    <section className="w-full flex flex-col overflow-hidden relative">
+    <section className="w-full flex flex-col overflow-hidden relative pb-12">
       {/* Background with layered muscle images */}
       <div className="absolute inset-0 flex items-end justify-center pointer-events-none">
         {/* Base image - always visible */}
         <img
           src="/man-funnel/target-muscle/base.png"
           alt="Base body"
-          className="absolute bottom-0 right-0 min-w-[390px] h-full w-auto"
+          className="absolute bottom-0 right-0 min-w-[390px]  w-auto"
         />
 
         {/* Overlay images - shown when selected */}
@@ -81,7 +81,7 @@ export default function FocusMuscles() {
             key={image}
             src={`/man-funnel/target-muscle/${image}`}
             alt="Muscle highlight"
-            className="absolute bottom-0 right-0 h-full min-w-[390px]  transition-opacity duration-300"
+            className="absolute bottom-0 right-0 min-w-[390px]  transition-opacity duration-300"
           />
         ))}
       </div>

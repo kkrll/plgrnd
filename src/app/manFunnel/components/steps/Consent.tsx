@@ -16,7 +16,7 @@ export default function NameStep() {
         }}
       />
       <Logo center />
-      <div className="flex flex-1 flex-col items-center mt-24">
+      <div className="flex flex-1 flex-col items-center">
         <h2 className="text-center mb-6">
           {funnelData.name},ready for your{" "}
           <span className="text-blue-300">personalized Zing plan</span>?
