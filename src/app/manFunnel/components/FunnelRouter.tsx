@@ -21,6 +21,8 @@ import FitnessHistory from "./steps/FitnessHistory";
 import FitnessLevelStep from "./steps/FitnessLevelStep";
 import HardToLose from "./steps/HardToLose";
 import TestimonyStep from "./steps/TestimonyStep";
+import AnalyzingStep from "./steps/AnalyzingStep";
+import StartingPointStep from "./steps/StartingPointStep";
 
 export default function FunnelRouter() {
   const {
@@ -72,6 +74,10 @@ export default function FunnelRouter() {
         return <HardToLose />;
       case "testimony":
         return <TestimonyStep />;
+      case "analyzing":
+        return <AnalyzingStep />;
+      case "starting-point":
+        return <StartingPointStep />;
       default:
         return <AgeStep />;
     }

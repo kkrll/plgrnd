@@ -38,7 +38,7 @@ export default function Button({
       {...buttonProps}
       type={type}
       onClick={onClick ? handleClick : undefined}
-      className={`w-full pressable py-4 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-700 disabled:cursor-not-allowed rounded-2xl font-semibold transition-all duration-100 ${className}`}
+      className={`w-full pressable py-4 bg-blue-500 hover:bg-blue-600 disabled:bg-grey-800 disabled:cursor-not-allowed rounded-2xl font-semibold transition-all duration-100 ${className}`}
     >
       {children}
     </button>
@@ -52,7 +52,7 @@ export default function Button({
       // Return null during SSR
       return null;
     }
-    
+
     return createPortal(
       <div className="fixed bottom-0 left-0 right-0 max-w-[420px] mx-auto p-6 bg-gradient-to-t from-black via-black/95 to-transparent pt-8 pointer-events-none z-[100]">
         <div className="pointer-events-auto">
