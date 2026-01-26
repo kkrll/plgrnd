@@ -145,7 +145,6 @@ export default function StartingPointStep() {
 
   // Calculate BMI
   const bmi = heightCm && weightKg ? calcBmi(heightCm, weightKg) : 21.5;
-  const bmiPosition = getBmiPosition(bmi);
   const bmiExplanation = getBmiExplanation(bmi);
 
   const bodyTypeLabel = bodyType ? bodyTypeLabels[bodyType] : "Athletic";
@@ -198,16 +197,16 @@ export default function StartingPointStep() {
         </div>
 
         {/* Focus Areas */}
-        {hardToLoseAreas && hardToLoseAreas.length > 0 && (
+        {focusMuscles && focusMuscles.length > 0 && (
           <div className="px-6 pb-6 pt-4 border-t border-grey-800">
-            <p className="text-grey-400 text-xs mb-2">Focus Areas</p>
-            <div className="flex flex-wrap gap-2">
-              {focusMuscles?.map((name: string) => (
+            <p className="text-grey-400 text-xs mb-2">Focus Muscles</p>
+            <div className="flex flex-wrap gap-1">
+              {focusMuscles.map((muscle) => (
                 <span
-                  key={name}
-                  className="px-3 py-1 bg-grey-700 rounded-full text-sm"
+                  key={muscle.id}
+                  className="px-2 py-1 bg-grey-700 rounded-full text-sm"
                 >
-                  {name}
+                  {muscle.label}
                 </span>
               ))}
             </div>

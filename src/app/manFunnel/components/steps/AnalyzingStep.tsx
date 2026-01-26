@@ -50,7 +50,7 @@ export default function AnalyzingStep() {
 
           {/* Text and progress bar */}
           <div className="flex-shrink-0 mb-8">
-            <h2 className="text-3xl font-bold text-center mb-2">
+            <h2 className="text-center mb-2">
               Analyzing your answers...
             </h2>
             <p className="text-center text-gray-400 mb-8">
@@ -58,15 +58,17 @@ export default function AnalyzingStep() {
             </p>
 
             {/* Progress bar */}
-            <div className="w-full bg-gray-800 h-1 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-green-500 transition-all duration-100 ease-linear"
-                style={{ width: `${progress}%` }}
-              />
+            <div className="flex gap-2 items-center">
+              <div className="w-full bg-gray-800 h-1 mt-3 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-greenery-700 to-greenery-400  transition-all duration-100 ease-linear"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+              <p className="text-right text-xl font-bold mt-4 w-14">
+                {Math.round(progress)}%
+              </p>
             </div>
-            <p className="text-right text-2xl font-bold mt-4">
-              {Math.round(progress)}%
-            </p>
           </div>
         </>
       ) : (
@@ -87,7 +89,7 @@ export default function AnalyzingStep() {
 
           {/* Completion message */}
           <div className="flex-shrink-0">
-            <h2 className="text-3xl font-bold text-center mb-8">
+            <h2 className="text-center mb-8">
               Your starting point is ready!
             </h2>
 
@@ -96,7 +98,8 @@ export default function AnalyzingStep() {
             </Button>
           </div>
         </>
-      )}
-    </section>
+      )
+      }
+    </section >
   );
 }

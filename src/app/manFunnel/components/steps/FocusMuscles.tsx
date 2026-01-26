@@ -52,7 +52,13 @@ export default function FocusMuscles() {
   };
 
   const handleSubmit = (selected: string | string[]) => {
-    const focusMuscles = Array.isArray(selected) ? selected : [selected];
+    const selectedIds = Array.isArray(selected) ? selected : [selected];
+    // Map IDs to objects with id and label
+    const focusMuscles = selectedIds.map(id => {
+      const muscle = muscleGroups.find(m => m.id === id);
+      return muscle ? { id: muscle.id, label: muscle.label } : null;
+    }).filter(Boolean) as Array<{ id: string; label: string }>;
+    
     updateData({ focusMuscles });
     nextStep();
   };

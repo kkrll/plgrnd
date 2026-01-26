@@ -30,7 +30,7 @@ export interface FunnelData {
   motivations?: string[];
   bodyType?: string;
   bodyTypeTarget?: string;
-  focusMuscles?: string[];
+  focusMuscles?: Array<{ id: string; label: string }>;
   fitnessLevel?: string;
   hardToLoseAreas?: string[];
   heightCm?: number;
