@@ -17,6 +17,7 @@ export type FunnelStep =
   | "focus-muscles"
   | "fitness-history"
   | "hard-to-lose"
+  | "muscle-gain-ease"
   | "testimony"
   | "fitness-level"
   | "analyzing"
@@ -33,6 +34,7 @@ export interface FunnelData {
   focusMuscles?: Array<{ id: string; label: string }>;
   fitnessLevel?: string;
   hardToLoseAreas?: string[];
+  muscleGainEase?: string;
   heightCm?: number;
   weightKg?: number;
   targetWeightKg?: number;
@@ -46,6 +48,7 @@ export interface FunnelStepConfig {
   section: number; // 0-3 (of 4 sections)
   totalSteps: number;
   order: number;
+  conditional?: (data: FunnelData) => boolean;
 }
 
 export type GoalType = "firmer-body" | "muscle" | "weight" | "mental-balance";
@@ -150,53 +153,62 @@ const GOALS_SECTION_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
     order: 13,
   },
   {
+    id: "muscle-gain-ease",
+    title: "How easily do you gain muscle?",
+    showProgressBar: true,
+    section: 0,
+    order: 14,
+    conditional: (data) =>
+      data.goal === "firmer-body" || data.goal === "muscle",
+  },
+  {
     id: "testimony",
     title: "Success Story",
     showProgressBar: true,
     section: 0,
-    order: 14,
+    order: 15,
   },
   {
     id: "height",
     title: "How tall are you?",
     showProgressBar: true,
     section: 0,
-    order: 15,
+    order: 16,
   },
   {
     id: "weight",
     title: "What's your current weight?",
     showProgressBar: true,
     section: 0,
-    order: 16,
+    order: 17,
   },
   {
     id: "target-weight",
     title: "What's your target weight?",
     showProgressBar: true,
     section: 0,
-    order: 17,
+    order: 18,
   },
   {
     id: "fitness-history",
     title: "How long ago were you in the best shape of your life?",
     showProgressBar: true,
     section: 0,
-    order: 18,
+    order: 19,
   },
   {
     id: "analyzing",
     title: "Analyzing your answers...",
     showProgressBar: false,
     section: 0,
-    order: 19,
+    order: 20,
   },
   {
     id: "starting-point",
     title: "Your Starting Point",
     showProgressBar: true,
     section: 0,
-    order: 20,
+    order: 21,
   },
 ];
 

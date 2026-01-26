@@ -20,6 +20,7 @@ import FocusMuscles from "./steps/FocusMuscles";
 import FitnessHistory from "./steps/FitnessHistory";
 import FitnessLevelStep from "./steps/FitnessLevelStep";
 import HardToLose from "./steps/HardToLose";
+import MuscleGainEase from "./steps/MuscleGainEase";
 import TestimonyStep from "./steps/TestimonyStep";
 import AnalyzingStep from "./steps/AnalyzingStep";
 import StartingPointStep from "./steps/StartingPointStep";
@@ -72,6 +73,8 @@ export default function FunnelRouter() {
         return <FitnessLevelStep />;
       case "hard-to-lose":
         return <HardToLose />;
+      case "muscle-gain-ease":
+        return <MuscleGainEase />;
       case "testimony":
         return <TestimonyStep />;
       case "analyzing":

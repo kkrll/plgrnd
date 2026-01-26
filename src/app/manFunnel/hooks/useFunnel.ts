@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { FunnelStep, FunnelData, FUNNEL_STEPS } from '../types';
 
 export function useFunnel() {
@@ -8,12 +8,20 @@ export function useFunnel() {
   const [funnelData, setFunnelData] = useState<FunnelData>({});
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
 
-  const currentStepIndex = FUNNEL_STEPS.findIndex(step => step.id === currentStep);
-  const currentStepConfig = FUNNEL_STEPS[currentStepIndex];
+  // Filter steps based on conditional logic
+  const activeSteps = useMemo(() => {
+    return FUNNEL_STEPS.filter(step => {
+      if (!step.conditional) return true;
+      return step.conditional(funnelData);
+    });
+  }, [funnelData]);
+
+  const currentStepIndex = activeSteps.findIndex(step => step.id === currentStep);
+  const currentStepConfig = activeSteps[currentStepIndex];
   
   // Calculate section-based progress
   const currentSection = currentStepConfig?.section ?? 0;
-  const stepsInCurrentSection = FUNNEL_STEPS.filter(step => step.section === currentSection);
+  const stepsInCurrentSection = activeSteps.filter(step => step.section === currentSection);
   const currentStepIndexInSection = stepsInCurrentSection.findIndex(step => step.id === currentStep);
   const sectionProgress = currentStepIndexInSection / Math.max(stepsInCurrentSection.length - 1, 1);
 
@@ -23,16 +31,16 @@ export function useFunnel() {
   }, []);
 
   const nextStep = useCallback(() => {
-    if (currentStepIndex < FUNNEL_STEPS.length - 1) {
-      goToStep(FUNNEL_STEPS[currentStepIndex + 1].id, 'forward');
+    if (currentStepIndex < activeSteps.length - 1) {
+      goToStep(activeSteps[currentStepIndex + 1].id, 'forward');
     }
-  }, [currentStepIndex, goToStep]);
+  }, [currentStepIndex, activeSteps, goToStep]);
 
   const previousStep = useCallback(() => {
     if (currentStepIndex > 0) {
-      goToStep(FUNNEL_STEPS[currentStepIndex - 1].id, 'backward');
+      goToStep(activeSteps[currentStepIndex - 1].id, 'backward');
     }
-  }, [currentStepIndex, goToStep]);
+  }, [currentStepIndex, activeSteps, goToStep]);
 
   const updateData = useCallback((data: Partial<FunnelData>) => {
     setFunnelData(prev => ({ ...prev, ...data }));
@@ -50,6 +58,6 @@ export function useFunnel() {
     nextStep,
     previousStep,
     updateData,
-    totalSteps: FUNNEL_STEPS.length,
+    totalSteps: activeSteps.length,
   };
 }
