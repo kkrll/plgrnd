@@ -8,6 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      height: {
+        screen: "100svh",
+      },
+      minHeight: {
+        screen: "100svh",
+      },
+      maxHeight: {
+        screen: "100svh",
+      },
       colors: {
         greenery: {
           100: "#F8FAEC",
