@@ -26,7 +26,9 @@ export type FunnelStep =
   | "freetime"
   | "features"
   | "water"
-  | "sleep";
+  | "sleep"
+  | "eating-habits"
+  | "food-cravings";
 
 export interface FunnelData {
   age?: string;
@@ -48,6 +50,8 @@ export interface FunnelData {
   freetime?: { id: string; label: string };
   water?: { id: string; label: string };
   sleep?: { id: string; label: string };
+  eatingHabits?: { id: string; label: string }[];
+  foodCravings?: { id: string; label: string }[];
 }
 
 export interface FunnelStepConfig {
@@ -263,6 +267,20 @@ const LIFESTYLE_AND_HABITS_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
     showProgressBar: true,
     section: 1,
     order: 4,
+  },
+  {
+    id: "eating-habits",
+    title: "Do you have any of the following habits?",
+    showProgressBar: true,
+    section: 1,
+    order: 5,
+  },
+  {
+    id: "food-cravings",
+    title: "What foods do you crave most often?",
+    showProgressBar: true,
+    section: 1,
+    order: 6,
   },
 ];
 

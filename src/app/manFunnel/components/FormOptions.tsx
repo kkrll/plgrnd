@@ -68,12 +68,12 @@ export default function FormOptions({
 
   return (
     <div className="w-full flex flex-col flex-1">
-      <div className={`flex flex-col gap-2 mb-6 flex-1 ${narrow ? "max-w-[60%]" : ""}`}>
+      <div className={`flex flex-col gap-2 mb-4 flex-1 ${narrow ? "max-w-[60%]" : ""}`}>
         {options.map((option) => (
           <button
             key={option.id}
             onClick={() => handleToggle(option.id)}
-            className={`pressable relative flex gap-3 items-center ${option.image ? "justify-start gap-4" : "justify-between"
+            className={`pressable font-semibold relative flex gap-3 items-center ${option.image ? "justify-start gap-4" : "justify-between"
               }  transition-all  ${isSelected(option.id) ? "bg-blue-500" : "bg-grey-800 "
               } ${option.image ? "pl-2 py-2 rounded-3xl" : "px-5 py-4 rounded-2xl"}`}
           >

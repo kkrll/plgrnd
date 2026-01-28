@@ -29,6 +29,8 @@ import FreeTime from "./steps/FreeTime";
 import Features from "./steps/Features";
 import Water from "./steps/Water";
 import Sleep from "./steps/Sleep";
+import EatingHabits from "./steps/EatingHabits";
+import FoodCravings from "./steps/FoodCravings";
 
 export default function FunnelRouter() {
   const {
@@ -96,6 +98,10 @@ export default function FunnelRouter() {
         return <Water />;
       case "sleep":
         return <Sleep />;
+      case "eating-habits":
+        return <EatingHabits />;
+      case "food-cravings":
+        return <FoodCravings />;
       default:
         return <AgeStep />;
     }
