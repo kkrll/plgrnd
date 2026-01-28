@@ -161,7 +161,7 @@ export default function StartingPointStep() {
       {/* Title */}
       <div className="mb-6">
         <h3 className="text-3xl font-bold mb-2">
-          Your Personalized Starting Point, {name || "User"}!
+          Your Personalized Starting Point{`, ` + name || ""}!
         </h3>
         <p className="text-grey-400">
           Here's a quick overview of where you are right now — and how Zing will craft

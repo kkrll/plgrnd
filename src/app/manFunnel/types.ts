@@ -32,7 +32,8 @@ export type FunnelStep =
   | "quote-1"
   | "quote-2"
   | "quote-3"
-  | "quote-4";
+  | "quote-4"
+  | "blockers";
 
 export interface FunnelData {
   age?: string;
@@ -314,6 +315,13 @@ const LIFESTYLE_AND_HABITS_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
     showProgressBar: true,
     section: 1,
     order: 10,
+  },
+  {
+    id: "blockers",
+    title: "Blockers",
+    showProgressBar: false,
+    section: 1,
+    order: 11,
   },
 ];
 

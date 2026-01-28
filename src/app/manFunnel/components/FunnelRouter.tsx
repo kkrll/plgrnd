@@ -32,6 +32,7 @@ import Sleep from "./steps/Sleep";
 import EatingHabits from "./steps/EatingHabits";
 import FoodCravings from "./steps/FoodCravings";
 import QuoteStep from "./steps/QuoteStep";
+import BlockersStep from "./steps/Blockers";
 
 export default function FunnelRouter() {
   const {
@@ -111,6 +112,8 @@ export default function FunnelRouter() {
         return <QuoteStep id="quote-3" quote="I’m not sure how to choose workouts that are suitable for me" />;
       case "quote-4":
         return <QuoteStep id="quote-4" quote="I struggle to stay consistent and need some outside motivation" />;
+      case "blockers":
+        return <BlockersStep />;
       default:
         return <AgeStep />;
     }
