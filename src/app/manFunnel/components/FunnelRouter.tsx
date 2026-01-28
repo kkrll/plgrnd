@@ -24,6 +24,11 @@ import MuscleGainEase from "./steps/MuscleGainEase";
 import TestimonyStep from "./steps/TestimonyStep";
 import AnalyzingStep from "./steps/AnalyzingStep";
 import StartingPointStep from "./steps/StartingPointStep";
+import Lifestyle from "./steps/Lifestyle";
+import FreeTime from "./steps/FreeTime";
+import Features from "./steps/Features";
+import Water from "./steps/Water";
+import Sleep from "./steps/Sleep";
 
 export default function FunnelRouter() {
   const {
@@ -81,6 +86,16 @@ export default function FunnelRouter() {
         return <AnalyzingStep />;
       case "starting-point":
         return <StartingPointStep />;
+      case "lifestyle":
+        return <Lifestyle />;
+      case "freetime":
+        return <FreeTime />;
+      case "features":
+        return <Features />;
+      case "water":
+        return <Water />;
+      case "sleep":
+        return <Sleep />;
       default:
         return <AgeStep />;
     }

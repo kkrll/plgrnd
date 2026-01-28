@@ -19,6 +19,11 @@ interface RulerPickerProps {
   /** Value display */
   renderValue?: RulerValueRenderer;
   unitLabel?: string;
+  valueClassName?: string;
+
+  /** Snap behavior */
+  snapEvery?: number;
+  snapDelayMs?: number;
 }
 
 export default function RulerPicker({
@@ -32,12 +37,17 @@ export default function RulerPicker({
   majorEvery = 10,
   renderValue,
   unitLabel,
+  valueClassName = "text-6xl font-bold tracking-tighter",
+  snapEvery = 1,
+  snapDelayMs = 120,
 }: RulerPickerProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const lastStepRef = useRef<number>(0);
   const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollLeftStart = useRef(0);
+  const snapTimeoutRef = useRef<number | null>(null);
+  const lastScrollLeftRef = useRef(0);
 
   const [displayValue, setDisplayValue] = useState(defaultValue);
 
@@ -61,16 +71,37 @@ export default function RulerPicker({
   const handleScroll = () => {
     if (!scrollRef.current) return;
     const scrollLeft = scrollRef.current.scrollLeft;
-    const currentStepIndex = Math.round(scrollLeft / TICK_DISTANCE);
+    lastScrollLeftRef.current = scrollLeft;
+    const rawStepIndex = scrollLeft / TICK_DISTANCE;
+    const currentStepIndex = Math.round(rawStepIndex);
+    const snappedStepIndex = snapEvery > 1 ? Math.round(rawStepIndex / snapEvery) * snapEvery : currentStepIndex;
 
-    if (currentStepIndex !== lastStepRef.current) {
+    if (snappedStepIndex !== lastStepRef.current) {
       if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(5);
-      lastStepRef.current = currentStepIndex;
+      lastStepRef.current = snappedStepIndex;
     }
 
-    const calculatedValue = Math.min(Math.max(min + currentStepIndex * step, min), max);
+    const displayStepIndex = snapEvery > 1 ? snappedStepIndex : currentStepIndex;
+    const calculatedValue = Math.min(Math.max(min + displayStepIndex * step, min), max);
     setDisplayValue(calculatedValue);
     onChange?.(calculatedValue);
+
+    if (snapEvery > 1) {
+      if (snapTimeoutRef.current) window.clearTimeout(snapTimeoutRef.current);
+      snapTimeoutRef.current = window.setTimeout(() => {
+        if (!scrollRef.current) return;
+        const latestScrollLeft = lastScrollLeftRef.current;
+        const latestRawIndex = latestScrollLeft / TICK_DISTANCE;
+        const snappedIndex = Math.round(latestRawIndex / snapEvery) * snapEvery + 1;
+        const snappedValue = Math.min(Math.max(min + snappedIndex * step, min), max);
+        const snappedScroll = snappedIndex * TICK_DISTANCE;
+        if (Math.abs(latestScrollLeft - snappedScroll) > 0.5) {
+          scrollRef.current.scrollTo({ left: snappedScroll, behavior: "smooth" });
+        }
+        setDisplayValue(snappedValue);
+        onChange?.(snappedValue);
+      }, snapDelayMs);
+    }
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -99,20 +130,27 @@ export default function RulerPicker({
     const initialSteps = (defaultValue - min) / step;
     const initialScroll = initialSteps * TICK_DISTANCE;
     scrollRef.current.scrollLeft = initialScroll;
-    lastStepRef.current = initialSteps;
+    lastStepRef.current = snapEvery > 1 ? Math.round(initialSteps / snapEvery) * snapEvery : initialSteps;
+    lastScrollLeftRef.current = initialScroll;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Only run once on mount
+
+  useEffect(() => {
+    return () => {
+      if (snapTimeoutRef.current) window.clearTimeout(snapTimeoutRef.current);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto bg-black text-white p-6 rounded-3xl">
       <div className="mb-8 text-center">
         {renderValue ? (
-          <div className="text-6xl font-bold tracking-tighter">{renderValue(displayValue)}</div>
+          <div className={valueClassName}>{renderValue(displayValue)}</div>
         ) : (
-          <>
-            <span className="text-6xl font-bold tracking-tighter">{displayValue}</span>
+          <div className={valueClassName}>
+            <span>{displayValue}</span>
             {unitLabel && <span className="text-xl text-gray-400 ml-2 font-medium">{unitLabel}</span>}
-          </>
+          </div>
         )}
       </div>
 

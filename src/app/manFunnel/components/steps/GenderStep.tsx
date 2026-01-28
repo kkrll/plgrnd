@@ -35,7 +35,7 @@ export default function GenderStep() {
         Some aspects of your plan adapt based <br /> on gender-specific physiology
       </p>
 
-      <div className="flex flex-col gap-4 flex-1">
+      <div className="flex flex-col gap-2 flex-1">
         {genders.map((gender) => (
           <button
             key={gender.id}

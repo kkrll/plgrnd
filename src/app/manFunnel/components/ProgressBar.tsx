@@ -11,17 +11,21 @@ export default function ProgressBar({ sectionProgress }: ProgressBarProps) {
   const { previousStep, currentSection } = useFunnelContext();
 
   const sectionTitle =
-    ({
-      0: "GOALS",
-      1: "PERSONAL DETAILS",
-      2: "CALIBRATION",
-      3: "RESULTS",
-    } as const)[currentSection] ?? "ONBOARDING";
+    (
+      {
+        0: "GOALS",
+        1: "LIFESTYLE AND HABITS",
+        2: "CALIBRATION",
+        3: "RESULTS",
+      } as const
+    )[currentSection] ?? "ONBOARDING";
 
   return (
     <div className="w-full px-6 py-2">
       {/*add section var*/}
-      <p className="uppercase w-full text-center text-sm my-2">{sectionTitle}</p>
+      <p className="uppercase w-full text-center text-sm my-2">
+        {sectionTitle}
+      </p>
       <div className="flex w-full items-center gap-4">
         <button
           onClick={() => {

@@ -9,6 +9,7 @@ interface FormOption {
   id: string;
   label: string;
   image?: string;
+  icon?: React.ReactNode;
 }
 
 interface FormOptionsProps {
@@ -72,7 +73,7 @@ export default function FormOptions({
           <button
             key={option.id}
             onClick={() => handleToggle(option.id)}
-            className={`pressable relative flex items-center ${option.image ? "justify-start gap-4" : "justify-between"
+            className={`pressable relative flex gap-3 items-center ${option.image ? "justify-start gap-4" : "justify-between"
               }  transition-all  ${isSelected(option.id) ? "bg-blue-500" : "bg-grey-800 "
               } ${option.image ? "pl-2 py-2 rounded-3xl" : "px-5 py-4 rounded-2xl"}`}
           >
@@ -86,6 +87,7 @@ export default function FormOptions({
                 />
               </div>
             )}
+            {option.icon && option.icon}
             <span className="text-white font-medium flex-1 text-left">
               {option.label}
             </span>

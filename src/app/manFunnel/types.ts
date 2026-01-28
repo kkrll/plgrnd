@@ -21,7 +21,12 @@ export type FunnelStep =
   | "testimony"
   | "fitness-level"
   | "analyzing"
-  | "starting-point";
+  | "starting-point"
+  | "lifestyle"
+  | "freetime"
+  | "features"
+  | "water"
+  | "sleep";
 
 export interface FunnelData {
   age?: string;
@@ -39,6 +44,10 @@ export interface FunnelData {
   weightKg?: number;
   targetWeightKg?: number;
   fitnessHistory?: string;
+  lifestyle?: { id: string; label: string };
+  freetime?: { id: string; label: string };
+  water?: { id: string; label: string };
+  sleep?: { id: string; label: string };
 }
 
 export interface FunnelStepConfig {
@@ -219,10 +228,51 @@ export const GOALS_SECTION: FunnelStepConfig[] = GOALS_SECTION_RAW.map(
   }),
 );
 
+const LIFESTYLE_AND_HABITS_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
+  {
+    id: "lifestyle",
+    title: "What’s your lifestyle like?",
+    showProgressBar: true,
+    section: 1,
+    order: 0,
+  },
+  {
+    id: "freetime",
+    title: "What’s your lifestyle like?",
+    showProgressBar: true,
+    section: 1,
+    order: 1,
+  },
+  {
+    id: "features",
+    title: "Just 5 minutes a day",
+    showProgressBar: true,
+    section: 1,
+    order: 2,
+  },
+  {
+    id: "water",
+    title: "How much water do you drink daily?",
+    showProgressBar: true,
+    section: 1,
+    order: 3,
+  },
+  {
+    id: "sleep",
+    title: "How much sleep do you usually get?",
+    showProgressBar: true,
+    section: 1,
+    order: 4,
+  },
+];
+
+export const LIFESTYLE_AND_HABITS_SECTION: FunnelStepConfig[] =
+  LIFESTYLE_AND_HABITS_RAW.map((step) => ({
+    ...step,
+    totalSteps: LIFESTYLE_AND_HABITS_RAW.length,
+  }));
+
 export const FUNNEL_STEPS: FunnelStepConfig[] = [
   ...GOALS_SECTION,
-  // Future sections will be added here:
-  // ...SECTION_2,
-  // ...SECTION_3,
-  // ...SECTION_4,
+  ...LIFESTYLE_AND_HABITS_SECTION,
 ];
