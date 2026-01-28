@@ -31,6 +31,7 @@ import Water from "./steps/Water";
 import Sleep from "./steps/Sleep";
 import EatingHabits from "./steps/EatingHabits";
 import FoodCravings from "./steps/FoodCravings";
+import QuoteStep from "./steps/QuoteStep";
 
 export default function FunnelRouter() {
   const {
@@ -102,6 +103,14 @@ export default function FunnelRouter() {
         return <EatingHabits />;
       case "food-cravings":
         return <FoodCravings />;
+      case "quote-1":
+        return <QuoteStep id="quote-1" quote="Eating is one of the ways I usually deal with stress" />;
+      case "quote-2":
+        return <QuoteStep id="quote-2" quote="I struggle to resist certain foods or snacks" />;
+      case "quote-3":
+        return <QuoteStep id="quote-3" quote="I’m not sure how to choose workouts that are suitable for me" />;
+      case "quote-4":
+        return <QuoteStep id="quote-4" quote="I struggle to stay consistent and need some outside motivation" />;
       default:
         return <AgeStep />;
     }

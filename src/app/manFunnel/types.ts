@@ -28,7 +28,11 @@ export type FunnelStep =
   | "water"
   | "sleep"
   | "eating-habits"
-  | "food-cravings";
+  | "food-cravings"
+  | "quote-1"
+  | "quote-2"
+  | "quote-3"
+  | "quote-4";
 
 export interface FunnelData {
   age?: string;
@@ -52,6 +56,7 @@ export interface FunnelData {
   sleep?: { id: string; label: string };
   eatingHabits?: { id: string; label: string }[];
   foodCravings?: { id: string; label: string }[];
+  quotes?: Record<string, boolean>;
 }
 
 export interface FunnelStepConfig {
@@ -281,6 +286,34 @@ const LIFESTYLE_AND_HABITS_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
     showProgressBar: true,
     section: 1,
     order: 6,
+  },
+  {
+    id: "quote-1",
+    title: "Eating is one of the ways I usually deal with stress",
+    showProgressBar: true,
+    section: 1,
+    order: 7,
+  },
+  {
+    id: "quote-2",
+    title: "I struggle to resist certain foods or snacks",
+    showProgressBar: true,
+    section: 1,
+    order: 8,
+  },
+  {
+    id: "quote-3",
+    title: "I’m not sure how to choose workouts that are suitable for me",
+    showProgressBar: true,
+    section: 1,
+    order: 9,
+  },
+  {
+    id: "quote-4",
+    title: "I struggle to stay consistent and need some outside motivation",
+    showProgressBar: true,
+    section: 1,
+    order: 10,
   },
 ];
 
