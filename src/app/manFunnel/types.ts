@@ -33,7 +33,9 @@ export type FunnelStep =
   | "quote-2"
   | "quote-3"
   | "quote-4"
-  | "blockers";
+  | "blockers"
+  | "exercise-frequency"
+  | "exercise-duration";
 
 export interface FunnelData {
   age?: string;
@@ -58,6 +60,8 @@ export interface FunnelData {
   eatingHabits?: { id: string; label: string }[];
   foodCravings?: { id: string; label: string }[];
   quotes?: Record<string, boolean>;
+  exerciseFrequency?: { id: string; label: string };
+  exerciseDuration?: { id: string; label: string };
 }
 
 export interface FunnelStepConfig {
@@ -331,7 +335,31 @@ export const LIFESTYLE_AND_HABITS_SECTION: FunnelStepConfig[] =
     totalSteps: LIFESTYLE_AND_HABITS_RAW.length,
   }));
 
+const PLAN_PERSONALIZATION_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
+  {
+    id: "exercise-frequency",
+    title: "How often do you work out?",
+    showProgressBar: true,
+    section: 2,
+    order: 0,
+  },
+  {
+    id: "exercise-duration",
+    title: "How long do you want your workouts to be?",
+    showProgressBar: true,
+    section: 2,
+    order: 1,
+  },
+];
+
+export const PLAN_PERSONALIZATION_SECTION: FunnelStepConfig[] =
+  PLAN_PERSONALIZATION_RAW.map((step) => ({
+    ...step,
+    totalSteps: PLAN_PERSONALIZATION_RAW.length,
+  }));
+
 export const FUNNEL_STEPS: FunnelStepConfig[] = [
   ...GOALS_SECTION,
   ...LIFESTYLE_AND_HABITS_SECTION,
+  ...PLAN_PERSONALIZATION_SECTION,
 ];

@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useFunnelContext } from "../../context/FunnelContext";
-import Button from "../Button";
-import RulerPicker from "../RulerPicker";
 import FormOptions from "../FormOptions";
 
 const options = [

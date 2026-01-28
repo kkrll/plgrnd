@@ -81,7 +81,7 @@ export default function BlockersStep() {
             {/* Continue Button */}
             <div className="mt-auto">
                 <Button type="submit" onClick={() => nextStep()}>
-                    Craft My Plan
+                    Personalize My Plan
                 </Button>
             </div>
         </section>

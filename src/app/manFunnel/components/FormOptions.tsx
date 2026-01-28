@@ -10,6 +10,8 @@ interface FormOption {
   label: string;
   image?: string;
   icon?: React.ReactNode;
+  isRecommended?: boolean;
+  secondaryLabel?: string;
 }
 
 interface FormOptionsProps {
@@ -19,6 +21,7 @@ interface FormOptionsProps {
   defaultSelected?: string | string[];
   narrow?: boolean;
   onSelectionChange?: (selected: string | string[]) => void;
+  secondary?: boolean;
 }
 
 export default function FormOptions({
@@ -28,6 +31,7 @@ export default function FormOptions({
   defaultSelected,
   narrow = false,
   onSelectionChange,
+  secondary = false,
 }: FormOptionsProps) {
   const [selected, setSelected] = useState<string[]>(() => {
     if (!defaultSelected) return [];
@@ -66,6 +70,15 @@ export default function FormOptions({
 
   const isSelected = (id: string) => selected.includes(id);
 
+  const getBgColor = (option: FormOption) => {
+    if (option.isRecommended) {
+      return isSelected(option.id)
+        ? "bg-blue-500"
+        : "bg-gradient-to-r from-blue-700 to-grey-800";
+    }
+    return isSelected(option.id) ? "bg-blue-500" : "bg-grey-800";
+  };
+
   return (
     <div className="w-full flex flex-col flex-1">
       <div className={`flex flex-col gap-2 mb-4 flex-1 ${narrow ? "max-w-[60%]" : ""}`}>
@@ -74,7 +87,7 @@ export default function FormOptions({
             key={option.id}
             onClick={() => handleToggle(option.id)}
             className={`pressable font-semibold relative flex gap-3 items-center ${option.image ? "justify-start gap-4" : "justify-between"
-              }  transition-all  ${isSelected(option.id) ? "bg-blue-500" : "bg-grey-800 "
+              }  transition-all  ${getBgColor(option)}
               } ${option.image ? "pl-2 py-2 rounded-3xl" : "px-5 py-4 rounded-2xl"}`}
           >
             {option.image && (
@@ -88,9 +101,23 @@ export default function FormOptions({
               </div>
             )}
             {option.icon && option.icon}
-            <span className="text-white font-medium flex-1 text-left">
-              {option.label}
-            </span>
+            <div className="flex flex-col gap-[2px] w-full">
+              <div className="flex items-center gap-2 w-full">
+                <span className={`text-white w-full font-medium flex-1 text-left ${secondary ? "text-lg" : ""}`}>
+                  {option.label}
+                </span>
+                {option.secondaryLabel && (
+                  <span className="font-normal">
+                    {option.secondaryLabel}
+                  </span>
+                )}
+              </div>
+              {option.isRecommended && (
+                <span className="text-xs text-blue-200 font-normal w-full text-left">
+                  Recommended based on your profile
+                </span>
+              )}
+            </div>
             {type === "checkbox" && (
               <div
                 className={`w-6 h-6 rounded-lg bg-grey-900 border flex items-center justify-center transition-all ${isSelected(option.id)
