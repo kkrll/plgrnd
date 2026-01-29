@@ -12,6 +12,7 @@ interface FormOption {
   icon?: React.ReactNode;
   isRecommended?: boolean;
   secondaryLabel?: string;
+  hasRemark?: string;
 }
 
 interface FormOptionsProps {
@@ -115,6 +116,11 @@ export default function FormOptions({
               {option.isRecommended && (
                 <span className="text-xs text-blue-200 font-normal w-full text-left">
                   Recommended based on your profile
+                </span>
+              )}
+              {option.hasRemark && (
+                <span className="text-xs text-grey-400 font-normal w-full text-left">
+                  {option.hasRemark}
                 </span>
               )}
             </div>

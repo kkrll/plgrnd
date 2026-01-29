@@ -39,7 +39,8 @@ export type FunnelStep =
   | "exercise-duration"
   | "equipment"
   | "cardio"
-  | "cardio-equipment";
+  | "cardio-equipment"
+  | "injuries";
 
 export interface FunnelData {
   age?: string;
@@ -70,6 +71,7 @@ export interface FunnelData {
   equipment?: { id: string; label: string }[];
   cardio?: boolean;
   cardioEquipment?: { id: string; label: string }[];
+  injuries?: { id: string; label: string }[];
 }
 
 export interface FunnelStepConfig {
@@ -386,6 +388,13 @@ const PLAN_PERSONALIZATION_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
     section: 2,
     order: 5,
     conditional: (data) => data.cardio === true,
+  },
+  {
+    id: "injuries",
+    title: "Do you have any of the following injuries?",
+    showProgressBar: true,
+    section: 2,
+    order: 6,
   },
 ];
 

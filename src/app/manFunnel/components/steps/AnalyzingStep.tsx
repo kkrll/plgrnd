@@ -32,21 +32,21 @@ export default function AnalyzingStep() {
 
   return (
     <section className="w-full h-screen p-6 flex flex-col overflow-hidden bg-black text-white">
+      {/* Video section - centered */}
+      <div className="flex-1 flex items-center justify-center mb-8 overflow-hidden">
+        <div className="video-container h-full max-h-[60vh]">
+          <video
+            src="/man-funnel/analysis/landing_c.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="h-full w-auto max-w-full object-contain"
+          />
+        </div>
+      </div>
       {!isComplete ? (
         <>
-          {/* Video section - centered */}
-          <div className="flex-1 flex items-center justify-center mb-8 overflow-hidden">
-            <div className="video-container h-full max-h-[60vh]">
-              <video
-                src="/man-funnel/body-scan/body-scan_c.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="h-full w-auto max-w-full object-contain"
-              />
-            </div>
-          </div>
 
           {/* Text and progress bar */}
           <div className="flex-shrink-0 mb-8">
@@ -73,20 +73,6 @@ export default function AnalyzingStep() {
         </>
       ) : (
         <>
-          {/* Video section - centered */}
-          <div className="flex-1 flex items-center justify-center mb-8 overflow-hidden">
-            <div className="video-container h-full max-h-[60vh]">
-              <video
-                src="/man-funnel/body-scan/body-scan_c.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="h-full w-auto max-w-full object-contain"
-              />
-            </div>
-          </div>
-
           {/* Completion message */}
           <div className="flex-shrink-0">
             <h2 className="text-center mb-8">
