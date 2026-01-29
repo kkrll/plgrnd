@@ -35,6 +35,10 @@ import QuoteStep from "./steps/QuoteStep";
 import BlockersStep from "./steps/Blockers";
 import ExerciseFrequency from "./steps/ExerciseFrequency";
 import ExerciseDuration from "./steps/ExerciseDuration";
+import LocationStep from "./steps/Location";
+import EqupmentStep from "./steps/Equipment";
+import CardioEquipmentStep from "./steps/CardioEquipment";
+import CardioStep from "./steps/Cardio";
 
 export default function FunnelRouter() {
   const {
@@ -116,10 +120,18 @@ export default function FunnelRouter() {
         return <QuoteStep id="quote-4" quote="I struggle to stay consistent and need some outside motivation" />;
       case "blockers":
         return <BlockersStep />;
+      case "location":
+        return <LocationStep />;
       case "exercise-frequency":
         return <ExerciseFrequency />;
       case "exercise-duration":
         return <ExerciseDuration />;
+      case "equipment":
+        return <EqupmentStep />;
+      case "cardio":
+        return <CardioStep />;
+      case "cardio-equipment":
+        return <CardioEquipmentStep />;
       default:
         return <AgeStep />;
     }

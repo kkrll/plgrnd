@@ -34,8 +34,12 @@ export type FunnelStep =
   | "quote-3"
   | "quote-4"
   | "blockers"
+  | "location"
   | "exercise-frequency"
-  | "exercise-duration";
+  | "exercise-duration"
+  | "equipment"
+  | "cardio"
+  | "cardio-equipment";
 
 export interface FunnelData {
   age?: string;
@@ -62,6 +66,10 @@ export interface FunnelData {
   quotes?: Record<string, boolean>;
   exerciseFrequency?: { id: string; label: string };
   exerciseDuration?: { id: string; label: string };
+  location?: { id: string; label: string };
+  equipment?: { id: string; label: string }[];
+  cardio?: boolean;
+  cardioEquipment?: { id: string; label: string }[];
 }
 
 export interface FunnelStepConfig {
@@ -337,18 +345,47 @@ export const LIFESTYLE_AND_HABITS_SECTION: FunnelStepConfig[] =
 
 const PLAN_PERSONALIZATION_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
   {
+    id: "location",
+    title: "Where do you want to train?",
+    showProgressBar: true,
+    section: 2,
+    order: 0,
+  },
+  {
     id: "exercise-frequency",
     title: "How often do you work out?",
     showProgressBar: true,
     section: 2,
-    order: 0,
+    order: 1,
   },
   {
     id: "exercise-duration",
     title: "How long do you want your workouts to be?",
     showProgressBar: true,
     section: 2,
-    order: 1,
+    order: 2,
+  },
+  {
+    id: "equipment",
+    title: "What equipment do you have?",
+    showProgressBar: true,
+    section: 2,
+    order: 3,
+  },
+  {
+    id: "cardio",
+    title: "Should Zing add cardio exercises to your plan?",
+    showProgressBar: true,
+    section: 2,
+    order: 4,
+  },
+  {
+    id: "cardio-equipment",
+    title: "What equipment do you have?",
+    showProgressBar: true,
+    section: 2,
+    order: 5,
+    conditional: (data) => data.cardio === true,
   },
 ];
 

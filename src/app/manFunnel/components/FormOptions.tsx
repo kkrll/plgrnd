@@ -81,17 +81,17 @@ export default function FormOptions({
 
   return (
     <div className="w-full flex flex-col flex-1">
-      <div className={`flex flex-col gap-2 mb-4 flex-1 ${narrow ? "max-w-[60%]" : ""}`}>
+      <div className={`flex flex-col gap-2 mb-2 flex-1 ${narrow ? "max-w-[60%]" : ""}`}>
         {options.map((option) => (
           <button
             key={option.id}
             onClick={() => handleToggle(option.id)}
             className={`pressable font-semibold relative flex gap-3 items-center ${option.image ? "justify-start gap-4" : "justify-between"
               }  transition-all  ${getBgColor(option)}
-              } ${option.image ? "pl-2 py-2 rounded-3xl" : "px-5 py-4 rounded-2xl"}`}
+              } ${option.image ? "pl-2 py-2 pr-4 gap-3 rounded-[32px]" : "px-5 py-4 rounded-2xl"}`}
           >
             {option.image && (
-              <div className="relative w-20 h-20 shrink-0 rounded-lg overflow-hidden">
+              <div className="relative w-20 h-20 shrink-0 rounded-3xl overflow-hidden">
                 <Image
                   src={option.image}
                   alt={option.label}
@@ -120,7 +120,7 @@ export default function FormOptions({
             </div>
             {type === "checkbox" && (
               <div
-                className={`w-6 h-6 rounded-lg bg-grey-900 border flex items-center justify-center transition-all ${isSelected(option.id)
+                className={`w-6 h-6 shrink-0 rounded-lg bg-grey-900 border flex items-center justify-center transition-all ${isSelected(option.id)
                   ? "border-transparent"
                   : "border-grey-700"
                   }`}

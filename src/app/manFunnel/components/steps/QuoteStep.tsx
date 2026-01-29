@@ -2,22 +2,26 @@
 
 import { useState } from "react";
 import { useFunnelContext } from "../../context/FunnelContext";
+import { useDebouncedAction } from "../../hooks/useDebouncedAction";
 import QuoteBg from "../QuoteBg";
 
 export default function QuoteStep({ id, quote }: { id: string, quote: string }) {
     const { updateData, nextStep, funnelData } = useFunnelContext();
     const [selected, setSelected] = useState<string | null>(null);
+    const debouncedAction = useDebouncedAction({ delay: 300 });
 
     const handleSelect = (result: boolean) => {
-        const selectedId = Array.isArray(id) ? id[0] : id;
-        setSelected(selectedId);
-        updateData({
-            quotes: {
-                ...(funnelData.quotes ?? {}),
-                [selectedId]: result,
-            },
+        debouncedAction(() => {
+            const selectedId = Array.isArray(id) ? id[0] : id;
+            setSelected(selectedId);
+            updateData({
+                quotes: {
+                    ...(funnelData.quotes ?? {}),
+                    [selectedId]: result,
+                },
+            });
+            nextStep();
         });
-        nextStep();
     };
 
     return (

@@ -45,8 +45,7 @@ export default function FocusMuscles() {
       <h2 className="text-2xl font-bold mb-8">Do you have any of the following habits?</h2>
       <div className="flex flex-col">
         <FormOptions options={options} type="checkbox" onSubmit={handleSubmit} onSelectionChange={handleSelectionChange} />
-        <Divider />
-        <Button onClick={() => nextStep()} sticky={false} className="bg-grey-800 font-semibold text-left p-6 mt-4">
+        <Button onClick={() => nextStep()} sticky={false} className="bg-grey-800 font-semibold text-left p-6">
           None of above
         </Button>
       </div>

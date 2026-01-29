@@ -23,7 +23,7 @@ export default function BlockersStep() {
     const blockers = isMuscleGoal ? blockersMuscle : blockersWeightLoss;
 
     return (
-        <section className="w-full p-6 flex flex-col bg-black text-white overflow-y-auto">
+        <section className="w-full px-6 pt-6 pb-24 flex flex-col bg-black text-white overflow-y-auto">
 
             <div>
                 <h2 className="w-full text-center my-2">

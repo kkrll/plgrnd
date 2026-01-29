@@ -25,7 +25,7 @@ export default function ExerciseDuration() {
   const { updateData, nextStep, funnelData } = useFunnelContext();
   const [selected, setSelected] = useState<string | null>(null);
 
-  const options = funnelData.lifestyle?.id === "home" ? optionsHome : optionsGym;
+  const options = funnelData.location?.id === "home" ? optionsHome : optionsGym;
 
   const handleSelect = (id: string | string[]) => {
     const selectedId = Array.isArray(id) ? id[0] : id;
