@@ -40,7 +40,8 @@ export type FunnelStep =
   | "equipment"
   | "cardio"
   | "cardio-equipment"
-  | "injuries";
+  | "injuries"
+  | "fin";
 
 export interface FunnelData {
   age?: string;
@@ -395,6 +396,13 @@ const PLAN_PERSONALIZATION_RAW: Omit<FunnelStepConfig, "totalSteps">[] = [
     showProgressBar: true,
     section: 2,
     order: 6,
+  },
+  {
+    id: "fin",
+    title: "Thank you!",
+    showProgressBar: false,
+    section: 2,
+    order: 7,
   },
 ];
 

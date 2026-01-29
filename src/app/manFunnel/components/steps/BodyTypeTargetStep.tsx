@@ -4,10 +4,10 @@ import { useFunnelContext } from "../../context/FunnelContext";
 import { useDebouncedAction } from "../../hooks/useDebouncedAction";
 
 const targetBodyTypes = [
-  { id: "lean", label: "Lean", image: "/man-funnel/body-type-target/lean.png" },
-  { id: "muscular", label: "Muscular", image: "/man-funnel/body-type-target/muscular.png" },
-  { id: "athletic", label: "Athletic", image: "/man-funnel/body-type-target/athletic.png" },
-  { id: "ripped", label: "Ripped", image: "/man-funnel/body-type-target/ripped.png" },
+  { id: "lean", label: "Lean", image: "/man-funnel/body-type-target/lean.webp" },
+  { id: "muscular", label: "Muscular", image: "/man-funnel/body-type-target/muscular.webp" },
+  { id: "athletic", label: "Athletic", image: "/man-funnel/body-type-target/athletic.webp" },
+  { id: "ripped", label: "Ripped", image: "/man-funnel/body-type-target/ripped.webp" },
 ];
 
 export default function BodyTypeTargetStep() {

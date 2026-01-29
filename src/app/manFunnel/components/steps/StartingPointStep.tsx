@@ -50,10 +50,10 @@ const goalLabels: Record<string, string> = {
 // Get the image path for body type
 const getBodyTypeImage = (bodyType: string) => {
   const imageMap: Record<string, string> = {
-    slender: "/man-funnel/starting-point/slender.png",
-    athletic: "/man-funnel/starting-point/athletic.png",
-    soft: "/man-funnel/starting-point/soft-mid-section.png",
-    "heavy-build": "/man-funnel/starting-point/heavy-build.png",
+    slender: "/man-funnel/starting-point/slender.webp",
+    athletic: "/man-funnel/starting-point/athletic.webp",
+    soft: "/man-funnel/starting-point/soft-mid-section.webp",
+    "heavy-build": "/man-funnel/starting-point/heavy-build.webp",
   };
   return imageMap[bodyType] || imageMap.athletic;
 };

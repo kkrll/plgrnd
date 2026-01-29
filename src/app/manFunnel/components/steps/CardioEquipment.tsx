@@ -7,12 +7,12 @@ import Button from "../Button";
 import { Divider } from "../Divider";
 
 const options = [
-    { id: "treadmill", label: "Treadmill", image: "/man-funnel/cardio-equipment/treadmill.png" },
-    { id: "stationary-bike", label: "Stationary Bike", image: "/man-funnel/cardio-equipment/stationary-bike.png" },
-    { id: "assault-bike", label: "Assault Bike", image: "/man-funnel/cardio-equipment/assault-bike.png" },
-    { id: "elliptical", label: "Elliptical", image: "/man-funnel/cardio-equipment/elliptical.png" },
-    { id: "stepper", label: "Stepper", image: "/man-funnel/cardio-equipment/stepper.png" },
-    { id: "rower", label: "Rower", image: "/man-funnel/cardio-equipment/rower.png" },
+    { id: "treadmill", label: "Treadmill", image: "/man-funnel/cardio-equipment/treadmill.webp" },
+    { id: "stationary-bike", label: "Stationary Bike", image: "/man-funnel/cardio-equipment/stationary-bike.webp" },
+    { id: "assault-bike", label: "Assault Bike", image: "/man-funnel/cardio-equipment/assault-bike.webp" },
+    { id: "elliptical", label: "Elliptical", image: "/man-funnel/cardio-equipment/elliptical.webp" },
+    { id: "stepper", label: "Stepper", image: "/man-funnel/cardio-equipment/stepper.webp" },
+    { id: "rower", label: "Rower", image: "/man-funnel/cardio-equipment/rower.webp" },
 ];
 
 export default function CardioEquipmentStep() {

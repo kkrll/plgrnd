@@ -34,7 +34,7 @@ export default function Features() {
             className="flex flex-col h-80 w-80 flex-shrink-0 items-center justify-between gap-4 snap-start rounded-3xl bg-blue-800 border border-blue-700 px-6 pb-6"
           >
             <Image
-              src={`/man-funnel/features/${card.id}.png`}
+              src={`/man-funnel/features/${card.id}.webp`}
               alt={card.label}
               width={300}
               height={0}

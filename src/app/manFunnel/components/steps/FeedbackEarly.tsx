@@ -27,7 +27,7 @@ export default function NameStep() {
       <div
         className="fixed bottom-0 left-0 right-0 w-full h-full -z-10 bg-cover bg-center"
         style={{
-          backgroundImage: `url(/man-funnel/feedback-early/bg.png)`,
+          backgroundImage: `url(/man-funnel/feedback-early/bg.webp)`,
         }}
       />
       <Logo center />
@@ -44,7 +44,7 @@ export default function NameStep() {
         <p className="text-center text-white/85 mb-4 uppercase text-sm font-semibold">Best AI Coach App according to</p>
         <div className="flex gap-2 w-full">
           <div className="flex-1 flex justify-center items-center bg-white/10 py-4 rounded-2xl backdrop-blur-md">
-            <img src="/man-funnel/feedback-early/tr.png" alt="Techradar" className="h-4" />
+            <img src="/man-funnel/feedback-early/tr.webp" alt="Techradar" className="h-4" />
           </div>
           <div className="flex-1 flex justify-center items-center bg-white/10 py-4 rounded-2xl backdrop-blur-md">
             <img src="/man-funnel/feedback-early/mh.svg" alt="Men's Health" className="h-4" />

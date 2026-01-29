@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useFunnelContext } from "../../context/FunnelContext";
 import FormOptions from "../FormOptions";
 import Button from "../Button";
-import { Divider } from "../Divider";
 
 const options = [
   {

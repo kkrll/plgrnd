@@ -8,37 +8,37 @@ const muscleGroups = [
   {
     id: "shoulders",
     label: "Shoulders",
-    highlightImage: "shoulders.png",
+    highlightImage: "shoulders.webp",
   },
   {
     id: "massive-biceps",
     label: "Massive Biceps",
-    highlightImage: "biceps.png",
+    highlightImage: "biceps.webp",
   },
   {
     id: "chest",
     label: "Chest",
-    highlightImage: "chest.png",
+    highlightImage: "chest.webp",
   },
   {
     id: "wider-back",
     label: "Wider Back",
-    highlightImage: "back.png",
+    highlightImage: "back.webp",
   },
   {
     id: "core",
     label: "Core",
-    highlightImage: "core.png",
+    highlightImage: "core.webp",
   },
   {
     id: "tight-glutes",
     label: "Tight Glutes",
-    highlightImage: "glutes.png",
+    highlightImage: "glutes.webp",
   },
   {
     id: "strong-legs",
     label: "Strong Legs",
-    highlightImage: "legs.png",
+    highlightImage: "legs.webp",
   },
 ];
 
@@ -58,7 +58,7 @@ export default function FocusMuscles() {
       const muscle = muscleGroups.find(m => m.id === id);
       return muscle ? { id: muscle.id, label: muscle.label } : null;
     }).filter(Boolean) as Array<{ id: string; label: string }>;
-    
+
     updateData({ focusMuscles });
     nextStep();
   };
@@ -76,7 +76,7 @@ export default function FocusMuscles() {
       <div className="absolute inset-0 flex items-end justify-center pointer-events-none">
         {/* Base image - always visible */}
         <img
-          src="/man-funnel/target-muscle/base.png"
+          src="/man-funnel/target-muscle/base.webp"
           alt="Base body"
           className="absolute bottom-0 right-0 min-w-[390px]  w-auto"
         />

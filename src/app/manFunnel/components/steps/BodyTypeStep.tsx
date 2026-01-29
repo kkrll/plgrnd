@@ -8,22 +8,22 @@ const bodyTypes = [
   {
     id: "slender",
     label: "Slender",
-    image: "/man-funnel/body-type/slender.png",
+    image: "/man-funnel/body-type/slender.webp",
   },
   {
     id: "athletic",
     label: "Athletic",
-    image: "/man-funnel/body-type/athletic.png",
+    image: "/man-funnel/body-type/athletic.webp",
   },
   {
     id: "soft",
     label: "Soft mid-section",
-    image: "/man-funnel/body-type/soft.png",
+    image: "/man-funnel/body-type/soft.webp",
   },
   {
     id: "heavy-build",
     label: "Heavy build",
-    image: "/man-funnel/body-type/heavy-build.png",
+    image: "/man-funnel/body-type/heavy-build.webp",
   },
 ];
 

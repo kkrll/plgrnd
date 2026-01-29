@@ -13,7 +13,7 @@ const options = [
   },
   {
     id: "salty-snacks",
-    label: "Salty snacksg",
+    label: "Salty snacks",
   },
   {
     id: "fast-food",

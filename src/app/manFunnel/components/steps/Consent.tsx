@@ -12,7 +12,7 @@ export default function NameStep() {
       <div
         className="fixed bottom-0 left-0 right-0 w-full h-full -z-10 bg-cover bg-center"
         style={{
-          backgroundImage: `url(/man-funnel/consent/bg.png)`,
+          backgroundImage: `url(/man-funnel/consent/bg.webp)`,
         }}
       />
       <Logo center />

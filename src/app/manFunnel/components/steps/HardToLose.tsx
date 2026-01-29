@@ -6,20 +6,20 @@ import { useFunnelContext } from "../../context/FunnelContext";
 import Button from "../Button";
 
 const muscleGoalAreas = [
-  { id: "size", label: "Gain Muscle Size", image: "/man-funnel/hard-to-lose/size.png" },
-  { id: "strength", label: "Build Strength", image: "/man-funnel/hard-to-lose/strength.png" },
-  { id: "definition", label: "Improve Definition", image: "/man-funnel/hard-to-lose/definition.png" },
+  { id: "size", label: "Gain Muscle Size", image: "/man-funnel/hard-to-lose/size.webp" },
+  { id: "strength", label: "Build Strength", image: "/man-funnel/hard-to-lose/strength.webp" },
+  { id: "definition", label: "Improve Definition", image: "/man-funnel/hard-to-lose/definition.webp" },
   { id: "equally-difficult", label: "All of them", image: null }
 ];
 
 const fatLossAreas = [
-  { id: "belly", label: "Belly", image: "/man-funnel/hard-to-lose/belly.png" },
-  { id: "love-handles", label: "Love Handles", image: "/man-funnel/hard-to-lose/love-handles.png" },
-  { id: "chest", label: "Chest", image: "/man-funnel/hard-to-lose/chest.png" },
-  { id: "lower-back", label: "Lower Back", image: "/man-funnel/hard-to-lose/lower-back.png" },
-  { id: "legs", label: "Legs", image: "/man-funnel/hard-to-lose/legs.png" },
-  { id: "arms", label: "Arms", image: "/man-funnel/hard-to-lose/arms.png" },
-  { id: "hips", label: "Hips", image: "/man-funnel/hard-to-lose/hips.png" },
+  { id: "belly", label: "Belly", image: "/man-funnel/hard-to-lose/belly.webp" },
+  { id: "love-handles", label: "Love Handles", image: "/man-funnel/hard-to-lose/love-handles.webp" },
+  { id: "chest", label: "Chest", image: "/man-funnel/hard-to-lose/chest.webp" },
+  { id: "lower-back", label: "Lower Back", image: "/man-funnel/hard-to-lose/lower-back.webp" },
+  { id: "legs", label: "Legs", image: "/man-funnel/hard-to-lose/legs.webp" },
+  { id: "arms", label: "Arms", image: "/man-funnel/hard-to-lose/arms.webp" },
+  { id: "hips", label: "Hips", image: "/man-funnel/hard-to-lose/hips.webp" },
   { id: "equally-difficult", label: "They are all equally difficult", image: null },
 ];
 

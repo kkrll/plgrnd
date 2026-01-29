@@ -7,25 +7,25 @@ import Button from "../Button";
 import { Divider } from "../Divider";
 
 const optionsHome = [
-    { id: "dumbbells", label: "Dumbbells", image: "/man-funnel/home-equipment/dumbbells.png" },
-    { id: "yoga-mat", label: "Yoga Mat", image: "/man-funnel/home-equipment/yoga-mat.png" },
-    { id: "barbell", label: "Barbell", image: "/man-funnel/home-equipment/barbell.png" },
-    { id: "jumprope", label: "Jumprope", image: "/man-funnel/home-equipment/jumprope.png" },
-    { id: "pull-up-bar", label: "Pull-up Bar", image: "/man-funnel/home-equipment/pull-up-bar.png" },
-    { id: "power-band", label: "Power Band", image: "/man-funnel/home-equipment/power-band.png" },
-    { id: "kettlebells", label: "Kettlebells", image: "/man-funnel/home-equipment/kettlebells.png" },
+    { id: "dumbbells", label: "Dumbbells", image: "/man-funnel/home-equipment/dumbbells.webp" },
+    { id: "yoga-mat", label: "Yoga Mat", image: "/man-funnel/home-equipment/yoga-mat.webp" },
+    { id: "barbell", label: "Barbell", image: "/man-funnel/home-equipment/barbell.webp" },
+    { id: "jumprope", label: "Jumprope", image: "/man-funnel/home-equipment/jumprope.webp" },
+    { id: "pull-up-bar", label: "Pull-up Bar", image: "/man-funnel/home-equipment/pull-up-bar.webp" },
+    { id: "power-band", label: "Power Band", image: "/man-funnel/home-equipment/power-band.webp" },
+    { id: "kettlebells", label: "Kettlebells", image: "/man-funnel/home-equipment/kettlebells.webp" },
 ];
 
 const optionsGym = [
-    { id: "lat-pull-down", label: "Lat Pull Down", image: "/man-funnel/gym-equipment/lat-pull-down.png" },
-    { id: "chest-press", label: "Chest Press", image: "/man-funnel/gym-equipment/chest-press.png" },
-    { id: "crossover-cable-machine", label: "Crossover Cable Machine", image: "/man-funnel/gym-equipment/crossover-cable.png" },
-    { id: "leg-press", label: "Leg Press", image: "/man-funnel/gym-equipment/leg-press.png" },
-    { id: "leg-extension", label: "Leg Extension", image: "/man-funnel/gym-equipment/leg-extension.png" },
-    { id: "leg-curl", label: "Leg Curl", image: "/man-funnel/gym-equipment/leg-curl.png" },
-    { id: "hyperextension", label: "Hyperextension", image: "/man-funnel/gym-equipment/hyperextension.png" },
-    { id: "crunch-bench", label: "Crunch Bench", image: "/man-funnel/gym-equipment/crunch-bench.png" },
-    { id: "pulley-machine", label: "Pulley Machine", image: "/man-funnel/gym-equipment/pulley-machine.png" },
+    { id: "lat-pull-down", label: "Lat Pull Down", image: "/man-funnel/gym-equipment/lat-pull-down.webp" },
+    { id: "chest-press", label: "Chest Press", image: "/man-funnel/gym-equipment/chest-press.webp" },
+    { id: "crossover-cable-machine", label: "Crossover Cable Machine", image: "/man-funnel/gym-equipment/crossover-cable.webp" },
+    { id: "leg-press", label: "Leg Press", image: "/man-funnel/gym-equipment/leg-press.webp" },
+    { id: "leg-extension", label: "Leg Extension", image: "/man-funnel/gym-equipment/leg-extension.webp" },
+    { id: "leg-curl", label: "Leg Curl", image: "/man-funnel/gym-equipment/leg-curl.webp" },
+    { id: "hyperextension", label: "Hyperextension", image: "/man-funnel/gym-equipment/hyperextension.webp" },
+    { id: "crunch-bench", label: "Crunch Bench", image: "/man-funnel/gym-equipment/crunch-bench.webp" },
+    { id: "pulley-machine", label: "Pulley Machine", image: "/man-funnel/gym-equipment/pulley-machine.webp" },
     ...optionsHome,
 ];
 

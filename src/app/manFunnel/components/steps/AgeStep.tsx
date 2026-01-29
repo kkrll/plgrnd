@@ -4,10 +4,10 @@ import { useFunnelContext } from "../../context/FunnelContext";
 import { useDebouncedAction } from "../../hooks/useDebouncedAction";
 
 const ageGroups = [
-  { id: "18-29", label: "Age: 18-29", image: "/man-funnel/age-screen/20s.png" },
-  { id: "30-39", label: "Age: 30-39", image: "/man-funnel/age-screen/30s.png" },
-  { id: "40-49", label: "Age: 40-49", image: "/man-funnel/age-screen/40s.png" },
-  { id: "50+", label: "Age: 50+", image: "/man-funnel/age-screen/50s.png" },
+  { id: "18-29", label: "Age: 18-29", image: "/man-funnel/age-screen/20s.webp" },
+  { id: "30-39", label: "Age: 30-39", image: "/man-funnel/age-screen/30s.webp" },
+  { id: "40-49", label: "Age: 40-49", image: "/man-funnel/age-screen/40s.webp" },
+  { id: "50+", label: "Age: 50+", image: "/man-funnel/age-screen/50s.webp" },
 ];
 
 export default function AgeStep() {

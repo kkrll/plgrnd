@@ -40,6 +40,7 @@ import EqupmentStep from "./steps/Equipment";
 import CardioEquipmentStep from "./steps/CardioEquipment";
 import CardioStep from "./steps/Cardio";
 import InjuriesStep from "./steps/Injuries";
+import Fin from "./steps/Fin";
 
 export default function FunnelRouter() {
   const {
@@ -135,6 +136,8 @@ export default function FunnelRouter() {
         return <CardioEquipmentStep />;
       case "injuries":
         return <InjuriesStep />;
+      case "fin":
+        return <Fin />;
       default:
         return <AgeStep />;
     }

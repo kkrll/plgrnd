@@ -27,7 +27,7 @@ export default function GoalDetailStep() {
         </>
       ),
       description: null,
-      illustration: "/man-funnel/stats/firmer-body.png",
+      illustration: "/man-funnel/stats/firmer-body.webp",
       cta: "Build My Toning Plan",
     },
     muscle: {
@@ -39,7 +39,7 @@ export default function GoalDetailStep() {
       ),
       description:
         "Zing helped  559,173 people build  strength with structured, AI-guided workouts",
-      illustration: "/man-funnel/stats/muscle.png",
+      illustration: "/man-funnel/stats/muscle.webp",
       cta: "Build My Strength Plan",
     },
     weight: {
@@ -50,7 +50,7 @@ export default function GoalDetailStep() {
         </>
       ),
       description: `You're not alone, we've helped 836,627 people lose weight`,
-      illustration: "/man-funnel/stats/weight.png",
+      illustration: "/man-funnel/stats/weight.webp",
       cta: "Build My Weight Loss Plan",
     },
     "mental-balance": {
@@ -62,7 +62,7 @@ export default function GoalDetailStep() {
         </>
       ),
       description: null,
-      illustration: "/man-funnel/stats/mental-balance.png",
+      illustration: "/man-funnel/stats/mental-balance.webp",
       cta: "Build My Stress Relief Plan",
     },
   };

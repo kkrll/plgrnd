@@ -4,8 +4,8 @@ import { useFunnelContext } from '../../context/FunnelContext';
 import { useDebouncedAction } from '../../hooks/useDebouncedAction';
 
 const genders = [
-  { id: 'male' as const, label: 'Male', image: '/man-funnel/gender-step/male.png' },
-  { id: 'female' as const, label: 'Female', image: '/man-funnel/gender-step/female.png' },
+  { id: 'male' as const, label: 'Male', image: '/man-funnel/gender-step/male.webp' },
+  { id: 'female' as const, label: 'Female', image: '/man-funnel/gender-step/female.webp' },
 ];
 
 export default function GenderStep() {

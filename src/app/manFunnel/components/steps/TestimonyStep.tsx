@@ -41,7 +41,7 @@ export default function TestimonyStep() {
           {/* Before photo */}
           <div className="relative rounded-2xl overflow-hidden aspect-auto">
             <img
-              src="/man-funnel/testimony/testimony.png"
+              src="/man-funnel/testimony/testimony.webp"
               alt="Before transformation"
               className="w-full h-full object-cover"
             />

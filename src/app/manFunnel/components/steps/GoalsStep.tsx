@@ -13,22 +13,22 @@ const goals: GoalsType = [
   {
     id: "firmer-body",
     label: "A firmer body",
-    icon: "/man-funnel/primary-goal/firmer-body.png",
+    icon: "/man-funnel/primary-goal/firmer-body.webp",
   },
   {
     id: "muscle",
     label: "More muscle",
-    icon: "/man-funnel/primary-goal/muscle.png",
+    icon: "/man-funnel/primary-goal/muscle.webp",
   },
   {
     id: "weight",
     label: "Weight loss",
-    icon: "/man-funnel/primary-goal/weight.png",
+    icon: "/man-funnel/primary-goal/weight.webp",
   },
   {
     id: "mental-balance",
     label: "Mental balance",
-    icon: "/man-funnel/primary-goal/mental-balance.png",
+    icon: "/man-funnel/primary-goal/mental-balance.webp",
   },
 ];
 
@@ -55,7 +55,7 @@ export default function GoalsStep() {
             onMouseUp={() => handleSelect(goal.id)}
             className="pressable relative group rounded-2xl overflow-hidden border border-blue-500/50 hover:border-blue-500 transition-all p-6 flex flex-col items-center justify-center gap-3"
             style={{
-              backgroundImage: `url(/man-funnel/primary-goal/bg.png)`,
+              backgroundImage: `url(/man-funnel/primary-goal/bg.webp)`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}

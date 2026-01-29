@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useFunnelContext } from "../../context/FunnelContext";
 import Button from "../Button";
-import Logo from "../Logo";
 
 export default function CardioStep() {
     const { nextStep, updateData } = useFunnelContext();

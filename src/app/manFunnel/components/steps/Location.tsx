@@ -5,9 +5,9 @@ import { useFunnelContext } from "../../context/FunnelContext";
 import FormOptions from "../FormOptions";
 
 const options = [
-    { id: "home", label: "Home", image: "/man-funnel/location/home.png" },
-    { id: "gym", label: "Gym", image: "/man-funnel/location/gym.png" },
-    { id: "mixed", label: "Mixed", image: "/man-funnel/location/mixed.png" },
+    { id: "home", label: "Home", image: "/man-funnel/location/home.webp" },
+    { id: "gym", label: "Gym", image: "/man-funnel/location/gym.webp" },
+    { id: "mixed", label: "Mixed", image: "/man-funnel/location/mixed.webp" },
 ];
 
 export default function LocationStep() {
