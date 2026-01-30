@@ -5,7 +5,7 @@ import "./styles.css";
 import QRCodeStyling from "qr-code-styling";
 import CardBg from "./cardBg";
 
-const baseUrl = "https://dev-male.zing-gym.coach/nysc";
+const baseUrl = "https://www.newyorksportsclubs.zing.coach/";
 const defaultParams = {
   ref: "campaign_victory",
   theme: "dark",
