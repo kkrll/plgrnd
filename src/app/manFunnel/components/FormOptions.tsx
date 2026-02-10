@@ -20,6 +20,7 @@ interface FormOptionsProps {
   type: "radio" | "checkbox";
   onSubmit: (selected: string | string[]) => void;
   defaultSelected?: string | string[];
+  selected?: string[];
   narrow?: boolean;
   onSelectionChange?: (selected: string | string[]) => void;
   secondary?: boolean;
@@ -30,6 +31,7 @@ export default function FormOptions({
   type,
   onSubmit,
   defaultSelected,
+  selected: controlledSelected,
   narrow = false,
   onSelectionChange,
   secondary = false,
@@ -38,6 +40,9 @@ export default function FormOptions({
     if (!defaultSelected) return [];
     return Array.isArray(defaultSelected) ? defaultSelected : [defaultSelected];
   });
+
+  // Use controlled selected if provided, otherwise use internal state
+  const currentSelected = controlledSelected ?? selected;
 
   const debouncedAction = useDebouncedAction({ delay: 300 });
   const handleToggle = (id: string) => {
@@ -65,11 +70,11 @@ export default function FormOptions({
 
   const handleSubmit = () => {
     if (type === "checkbox") {
-      onSubmit(selected);
+      onSubmit(currentSelected);
     }
   };
 
-  const isSelected = (id: string) => selected.includes(id);
+  const isSelected = (id: string) => currentSelected.includes(id);
 
   const getBgColor = (option: FormOption) => {
     if (option.isRecommended) {
@@ -156,7 +161,7 @@ export default function FormOptions({
       </div>
 
       {type === "checkbox" && (
-        <Button onClick={handleSubmit} disabled={selected.length === 0}>
+        <Button onClick={handleSubmit} disabled={currentSelected.length === 0}>
           Continue
         </Button>
       )}

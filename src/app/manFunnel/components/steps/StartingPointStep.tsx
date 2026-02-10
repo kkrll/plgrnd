@@ -13,12 +13,31 @@ const bodyTypeLabels: Record<string, string> = {
   "heavy-build": "Heavy build",
 };
 
+const EFFORT_LEVELS = ["Low", "Normal", "Medium", "High", "Very High"];
+
+type TargetBodyRecord = {
+  title: string;
+  BMI: number;
+};
+
 // Target body type mapping
-const targetBodyTypeLabels: Record<string, string> = {
-  lean: "Be lean",
-  muscular: "Be muscular",
-  ripped: "Be ripped",
-  athletic: "Be athletic",
+const targetBodyType: Record<string, TargetBodyRecord> = {
+  lean: {
+    title: "Lean",
+    BMI: 20,
+  },
+  muscular: {
+    title: "Muscular",
+    BMI: 24,
+  },
+  ripped: {
+    title: "Ripped",
+    BMI: 25,
+  },
+  athletic: {
+    title: "Athletic",
+    BMI: 23,
+  },
 };
 
 // Fitness level mapping
@@ -48,14 +67,24 @@ const goalLabels: Record<string, string> = {
 };
 
 // Get the image path for body type
-const getBodyTypeImage = (bodyType: string) => {
+const getBodyTypeImage = (bodyType?: string) => {
   const imageMap: Record<string, string> = {
     slender: "/man-funnel/starting-point/slender.webp",
     athletic: "/man-funnel/starting-point/athletic.webp",
     soft: "/man-funnel/starting-point/soft-mid-section.webp",
     "heavy-build": "/man-funnel/starting-point/heavy-build.webp",
   };
-  return imageMap[bodyType] || imageMap.athletic;
+  return bodyType ? imageMap[bodyType] : imageMap.athletic;
+};
+
+const getBodyTargetImage = (bodyTarget?: string) => {
+  const imageMap: Record<string, string> = {
+    lean: "/man-funnel/starting-point/lean-goal.webp",
+    muscular: "/man-funnel/starting-point/muscular-goal.webp",
+    athletic: "/man-funnel/starting-point/athletic-goal.webp",
+    ripped: "/man-funnel/starting-point/ripped-goal.webp",
+  };
+  return bodyTarget ? imageMap[bodyTarget] : imageMap.athletic;
 };
 
 // Get personalized message based on body type and goal
@@ -131,109 +160,121 @@ const getBmiExplanation = (bmi: number): string => {
 export default function StartingPointStep() {
   const { funnelData, nextStep } = useFunnelContext();
 
-  const {
-    name,
-    heightCm,
-    weightKg,
-    bodyType,
-    bodyTypeTarget,
-    goal,
-    fitnessLevel,
-    hardToLoseAreas,
-    focusMuscles,
-  } = funnelData;
+  const { name, heightCm, weightKg, bodyType, bodyTypeTarget, goal } =
+    funnelData;
 
   // Calculate BMI
   const bmi = heightCm && weightKg ? calcBmi(heightCm, weightKg) : 21.5;
-  const bmiExplanation = getBmiExplanation(bmi);
-
   const bodyTypeLabel = bodyType ? bodyTypeLabels[bodyType] : "Athletic";
-  const bodyTypeImage = bodyType ? getBodyTypeImage(bodyType) : getBodyTypeImage("athletic");
-  const targetBodyLabel = bodyTypeTarget ? targetBodyTypeLabels[bodyTypeTarget] : "Be fitter";
-  const fitnessLevelLabel = fitnessLevel ? fitnessLevelLabels[fitnessLevel] : "On and off";
-  const goalLabel = goal ? goalLabels[goal] : "Lose Weight";
+  const bodyTypeImage = getBodyTypeImage(bodyType);
+  const bodyTargetImage = getBodyTargetImage(bodyTypeTarget);
   const personalizedMessage =
     bodyType && goal ? getPersonalizedMessage(bodyType, goal) : "";
 
   return (
-    <section className="w-full min-h-screen p-6 flex flex-col bg-black text-white overflow-y-auto">
-
+    <section className="w-full p-6 flex flex-col bg-black text-white overflow-y-auto">
       {/* Title */}
-      <div className="mb-6">
-        <h3 className="text-3xl font-bold mb-2">
-          Your Personalized Starting Point{`, ` + name || ""}!
-        </h3>
-        <p className="text-grey-400">
-          Here's a quick overview of where you are right now — and how Zing will craft
-          your{" "}
-          <span className="text-blue-400 font-semibold">{goalLabel}</span> plan based on
-          your profile.
-        </p>
-      </div>
+      <h3 className="text-3xl font-bold mb-6">
+        Your Personalized Starting Point{`, ` + name || ""}!
+      </h3>
 
       {/* Main Stats Card */}
       <div className="bg-grey-800 rounded-3xl mb-2 relative overflow-hidden">
-        <div className="flex justify-between border-b border-grey-700">
-          {/* Left side - text info */}
-          <div className="flex-1 p-6">
-            <p className="text-grey-400 text-xs mb-1">Body Type</p>
-            <p className="font-bold mb-4">{bodyTypeLabel}</p>
-
-            <p className="text-grey-400 text-xs mb-1">Your Training level</p>
-            <p className="font-semibold mb-4">{fitnessLevelLabel}</p>
-
-            <p className="text-grey-400 text-xs mb-1">Dream Body</p>
-            <p className="font-semibold">{targetBodyLabel}</p>
+        <div className="pt-6 pb-4 px-5">
+          <div className="flex justify-between px-1 items-center mb-4">
+            <h3>Required Effort</h3>
+            <div className="px-2 py-1 bg-blue-500 uppercase text-xs rounded-xl">
+              {EFFORT_LEVELS[1]}
+            </div>
           </div>
-
-          {/* Right side - body image */}
-          <div className="w-32 flex items-end justify-end">
-            <img
-              src={bodyTypeImage}
-              alt={bodyTypeLabel}
-              className="h-full w-auto object-cover"
-            />
+          <div className="bg-gradient-to-r from-blue-500 to-tangerine-500 h-8 rounded-full flex px-4 mb-1">
+            {EFFORT_LEVELS.map((level, index) => {
+              return (
+                <div
+                  key={level}
+                  className="h-full w-full flex items-center justify-center"
+                >
+                  {index === 1 ? (
+                    <div className="h-9 w-2 bg-white rounded-full" />
+                  ) : (
+                    <div className="h-1 w-1 bg-white/40 rounded-full" />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <div className="uppercase flex justify-between text-grey-600 px-7">
+            <p className="text-sm">Low</p>
+            <p className="text-sm">High</p>
           </div>
         </div>
 
-        {/* Focus Areas */}
-        {focusMuscles && focusMuscles.length > 0 && (
-          <div className="px-6 pb-6 pt-4 border-t border-grey-800">
-            <p className="text-grey-400 text-xs mb-2">Focus Muscles</p>
-            <div className="flex flex-wrap gap-1">
-              {focusMuscles.map((muscle) => (
-                <span
-                  key={muscle.id}
-                  className="px-2 py-1 bg-grey-700 rounded-full text-sm"
-                >
-                  {muscle.label}
-                </span>
-              ))}
+        {/* Body comparison with background */}
+        <div className="relative pb-4">
+          <img
+            src="/man-funnel/starting-point/bg.webp"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="relative flex justify-between">
+            <img
+              src={bodyTypeImage}
+              alt={bodyTypeLabel}
+              className="w-1/3 object-cover object-top -scale-x-100"
+            />
+            <img
+              src={bodyTargetImage}
+              alt={bodyTypeTarget && targetBodyType[bodyTypeTarget].title}
+              className="w-1/3 object-cover object-top"
+            />
+          </div>
+
+          <div className="absolute left-0 right-0 bottom-0 flex items-center bg-black/40 backdrop-blur-md">
+            <div className="flex-1 text-center py-2">
+              <p className="font-bold text-sm">{bodyTypeLabel}</p>
+              <p className="text-grey-400 text-xs">{bmi.toFixed(1)} BMI</p>
+            </div>
+            {/* Chevron arrow */}
+            <svg
+              width="16"
+              height="24"
+              viewBox="0 0 16 24"
+              fill="none"
+              className="shrink-0 text-grey-500"
+            >
+              <path
+                d="M4 4L12 12L4 20"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <div className="flex-1 text-center py-2">
+              <p className="font-bold text-sm">
+                {bodyTypeTarget && targetBodyType[bodyTypeTarget].title}
+              </p>
+              <p className="text-grey-400 text-xs">
+                {bodyTypeTarget &&
+                  targetBodyType[bodyTypeTarget].BMI.toFixed(1) + ` BMI`}
+              </p>
             </div>
           </div>
-        )}
+        </div>
+        <div className="bg-gradient-to-r from-blue-600 to-blue-400 px-6 pt-4 pb-6">
+          <p className="text-xs text-blue-200 mb-2">What it means for you</p>
+          <p className="text-white font-semibold leading-relaxed">
+            {personalizedMessage}
+          </p>
+        </div>
       </div>
 
       {/* BMI Section */}
-      <div className="bg-grey-800 rounded-3xl p-6 mb-2">
-
-
-        <BmiGauge
-          value={bmi}
-          min={15}
-          max={40}
-        />
+      {/*<div className="bg-grey-800 rounded-3xl p-6 mb-2">
+        <BmiGauge value={bmi} min={15} max={40} />
 
         <p className="text-sm text-grey-400 mt-6">{bmiExplanation}</p>
-      </div>
-
-      {/* What it means for you */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-400 rounded-3xl p-6 mb-6">
-        <p className="text-xs text-blue-200 mb-2">What it means for you</p>
-        <p className="text-white font-semibold leading-relaxed">
-          {personalizedMessage}
-        </p>
-      </div>
+      </div>*/}
 
       {/* Continue Button */}
       <div className="mt-auto">

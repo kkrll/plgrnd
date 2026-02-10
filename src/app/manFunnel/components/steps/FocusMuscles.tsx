@@ -12,7 +12,7 @@ const muscleGroups = [
   },
   {
     id: "massive-biceps",
-    label: "Massive Biceps",
+    label: "Arms",
     highlightImage: "biceps.webp",
   },
   {
@@ -22,42 +22,91 @@ const muscleGroups = [
   },
   {
     id: "wider-back",
-    label: "Wider Back",
+    label: "Back",
     highlightImage: "back.webp",
   },
   {
     id: "core",
-    label: "Core",
+    label: "Belly",
     highlightImage: "core.webp",
   },
   {
     id: "tight-glutes",
-    label: "Tight Glutes",
+    label: "Glutes",
     highlightImage: "glutes.webp",
   },
   {
     id: "strong-legs",
-    label: "Strong Legs",
+    label: "Legs",
     highlightImage: "legs.webp",
   },
+  {
+    id: "full-body",
+    label: "Full body",
+    highlightImage: "",
+  },
 ];
+
+const INDIVIDUAL_MUSCLE_IDS = [
+  "shoulders",
+  "massive-biceps",
+  "chest",
+  "wider-back",
+  "core",
+  "tight-glutes",
+  "strong-legs",
+];
+
+const isFullBodySelection = (ids: string[]) =>
+  INDIVIDUAL_MUSCLE_IDS.every((id) => ids.includes(id));
 
 export default function FocusMuscles() {
   const { updateData, nextStep } = useFunnelContext();
   const [selectedMuscles, setSelectedMuscles] = useState<string[]>([]);
 
   const handleSelectionChange = (selected: string | string[]) => {
-    const muscles = Array.isArray(selected) ? selected : [selected];
+    let muscles = Array.isArray(selected) ? selected : [selected];
+
+    // Check if "full-body" was just added or removed
+    const hadFullBody = selectedMuscles.includes("full-body");
+    const hasFullBody = muscles.includes("full-body");
+
+    if (!hadFullBody && hasFullBody) {
+      // "Full body" was just selected - add all individual muscles
+      muscles = ["full-body", ...INDIVIDUAL_MUSCLE_IDS];
+    } else if (hadFullBody && !hasFullBody) {
+      // "Full body" was just deselected - remove all individual muscles
+      muscles = muscles.filter((id) => id !== "full-body");
+    } else {
+      // Individual muscle was toggled
+      const individualMuscles = muscles.filter((id) => id !== "full-body");
+
+      // Check if all individual muscles are now selected
+      if (isFullBodySelection(individualMuscles)) {
+        // All muscles selected - add "full-body" if not already there
+        if (!muscles.includes("full-body")) {
+          muscles = ["full-body", ...individualMuscles];
+        }
+      } else {
+        // Not all muscles selected - remove "full-body" if it was there
+        muscles = individualMuscles;
+      }
+    }
+
     setSelectedMuscles(muscles);
   };
 
   const handleSubmit = (selected: string | string[]) => {
-    const selectedIds = Array.isArray(selected) ? selected : [selected];
+    let selectedIds = Array.isArray(selected) ? selected : [selected];
+    // Remove "full-body" from final data - only save individual muscle objects
+    selectedIds = selectedIds.filter((id) => id !== "full-body");
     // Map IDs to objects with id and label
-    const focusMuscles = selectedIds.map(id => {
-      const muscle = muscleGroups.find(m => m.id === id);
-      return muscle ? { id: muscle.id, label: muscle.label } : null;
-    }).filter(Boolean) as Array<{ id: string; label: string }>;
+    const focusMuscles = selectedIds
+      .map((id) => {
+        const muscle = muscleGroups.find((m) => m.id === id);
+        return muscle ? { id: muscle.id, label: muscle.label } : null;
+      })
+      .filter(Boolean) as Array<{ id: string; label: string }>;
 
     updateData({ focusMuscles });
     nextStep();
@@ -66,7 +115,9 @@ export default function FocusMuscles() {
   // Get active muscle images based on selections
   const getActiveMuscleImages = () => {
     return muscleGroups
-      .filter((group) => selectedMuscles.includes(group.id))
+      .filter(
+        (group) => group.highlightImage && selectedMuscles.includes(group.id),
+      )
       .map((group) => group.highlightImage);
   };
 
@@ -101,6 +152,7 @@ export default function FocusMuscles() {
         <FormOptions
           options={muscleGroups}
           type="checkbox"
+          selected={selectedMuscles}
           onSubmit={handleSubmit}
           onSelectionChange={handleSelectionChange}
           narrow={true}

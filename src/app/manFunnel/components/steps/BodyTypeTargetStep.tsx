@@ -4,10 +4,26 @@ import { useFunnelContext } from "../../context/FunnelContext";
 import { useDebouncedAction } from "../../hooks/useDebouncedAction";
 
 const targetBodyTypes = [
-  { id: "lean", label: "Lean", image: "/man-funnel/body-type-target/lean.webp" },
-  { id: "muscular", label: "Muscular", image: "/man-funnel/body-type-target/muscular.webp" },
-  { id: "athletic", label: "Athletic", image: "/man-funnel/body-type-target/athletic.webp" },
-  { id: "ripped", label: "Ripped", image: "/man-funnel/body-type-target/ripped.webp" },
+  {
+    id: "lean",
+    label: "Lean",
+    image: "/man-funnel/body-type-target/lean.webp",
+  },
+  {
+    id: "muscular",
+    label: "Muscular",
+    image: "/man-funnel/body-type-target/muscular.webp",
+  },
+  {
+    id: "athletic",
+    label: "Athletic",
+    image: "/man-funnel/body-type-target/athletic.webp",
+  },
+  {
+    id: "ripped",
+    label: "Ripped",
+    image: "/man-funnel/body-type-target/ripped.webp",
+  },
 ];
 
 export default function BodyTypeTargetStep() {
@@ -22,7 +38,6 @@ export default function BodyTypeTargetStep() {
 
   return (
     <section className="w-full p-6 min-h-screen flex flex-col">
-
       <h2 className="mb-6">{funnelData.name}, what's your dream body?</h2>
 
       <div className="grid grid-cols-2 gap-2 ">
@@ -36,13 +51,11 @@ export default function BodyTypeTargetStep() {
               <img
                 src={type.image}
                 alt={type.label}
-                className="w-full h-full object-cover"
+                className="mx-auto h-full object-cover"
               />
             </div>
             <div className="flex-shrink-0 bg-grey-700 w-full px-4 py-2 flex items-center justify-center">
-              <span className="text-white font-semibold">
-                {type.label}
-              </span>
+              <span className="text-white font-semibold">{type.label}</span>
             </div>
           </button>
         ))}
