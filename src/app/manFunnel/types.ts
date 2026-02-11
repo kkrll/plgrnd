@@ -45,6 +45,7 @@ export type FunnelStep =
   | "apple-watch"
   | "glp"
   | "program"
+  | "commitment"
   | "fin";
 
 export interface FunnelData {
@@ -80,6 +81,7 @@ export interface FunnelData {
   coach?: string;
   appleWatch?: boolean;
   glp?: boolean;
+  program?: string;
 }
 
 export interface FunnelStepConfig {
@@ -399,6 +401,12 @@ const PLAN_PERSONALIZATION_RAW: Omit<
     id: "program",
     title: "Choose your traning program",
     showProgressBar: true,
+    section: 2,
+  },
+  {
+    id: "commitment",
+    title: "Are you ready to make the commitment?",
+    showProgressBar: false,
     section: 2,
   },
   {

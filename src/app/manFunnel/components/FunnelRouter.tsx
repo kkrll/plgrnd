@@ -44,6 +44,7 @@ import Fin from "./steps/Fin";
 import Coach from "./steps/Coach";
 import AppleWatch from "./steps/AppleWatch";
 import GLP from "./steps/GLP";
+import Program from "./steps/Program";
 
 export default function FunnelRouter() {
   const {
@@ -165,6 +166,8 @@ export default function FunnelRouter() {
         return <AppleWatch />;
       case "glp":
         return <GLP />;
+      case "program":
+        return <Program />;
       case "fin":
         return <Fin />;
       default:
