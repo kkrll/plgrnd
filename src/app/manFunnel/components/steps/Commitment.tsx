@@ -3,25 +3,39 @@
 import { useState } from "react";
 import { useFunnelContext } from "../../context/FunnelContext";
 import FormOptions from "../FormOptions";
+import Logo from "../Logo";
 
 const options = [
-  { id: "no-time", label: "I hardly have any time for myself" },
-  { id: "some-time", label: "I’m busy but try to find some time" },
-  { id: "flexible", label: "My schedule is open and flexible" },
+  {
+    id: "today",
+    label: (
+      <>
+        Yes! <br /> I will do my first workout tomorrow!
+      </>
+    ),
+  },
+  {
+    id: "tomorrow",
+    label: (
+      <>
+        Yes! <br /> I will do my first workout today!
+      </>
+    ),
+  },
+  { id: "no", label: "I’m not ready to make the commitment" },
 ];
 
-export default function FreeTime() {
+export default function Commitment() {
   const { updateData, nextStep } = useFunnelContext();
   const [selected, setSelected] = useState<string | null>(null);
 
   const handleSelect = (id: string | string[]) => {
-    const selectedId = Array.isArray(id) ? id[0] : id;
-    setSelected(selectedId);
+    setSelected(id as string);
     updateData({
-      freetime: options.find((option) => option.id === selectedId),
+      commitment: id as "today" | "tomorrow" | "no",
     });
 
-    if (id === "no-time" || id === "some-time") {
+    if (id === "no") {
       setTimeout(() => {
         nextStep();
       }, 5000);
@@ -31,22 +45,19 @@ export default function FreeTime() {
   };
 
   return (
-    <section className="w-full p-6 flex flex-col">
-      <h2 className="text-2xl font-bold mb-8">
-        How much time do you have for yourself every day?
+    <section className="w-full p-6 flex flex-col items-center">
+      <Logo />
+      <h2 className="text-center mb-8">
+        <span className="text-blue-300">Are you ready</span> <br />
+        to make the commitment?
       </h2>
 
       <FormOptions options={options} type="radio" onSubmit={handleSelect} />
 
       <div
-        className={`bottom-thing ${
-          selected === "no-time" || selected === "some-time" ? "animate-in" : ""
-        }`}
+        className={`bottom-thing ${selected === "no" ? "animate-in" : ""}`}
         style={{
-          display:
-            selected === "no-time" || selected === "some-time"
-              ? "flex"
-              : "none",
+          display: selected === "no" ? "flex" : "none",
         }}
       >
         <span className="pt-2">
@@ -76,8 +87,7 @@ export default function FreeTime() {
         </span>
 
         <p className="text-white text-[14px]">
-          Just 5 minutes a day. <br />
-          That’s all you need to develop a routine that works for you.
+          That's ok — you can start when you are ready.
         </p>
       </div>
     </section>

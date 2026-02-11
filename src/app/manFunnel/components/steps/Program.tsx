@@ -65,7 +65,18 @@ export default function Program() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const programOptions =
     options[location?.id as keyof typeof options] ?? options.gym;
-  const [activeIndex, setActiveIndex] = useState(0);
+  const defaultIndex = programOptions.findIndex((o) => o.label === "Balanced");
+  const [activeIndex, setActiveIndex] = useState(defaultIndex >= 0 ? defaultIndex : 0);
+
+  // Scroll to default option on mount
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container || defaultIndex < 0) return;
+    const card = container.children[defaultIndex] as HTMLElement;
+    if (card) {
+      container.scrollTo({ left: card.offsetLeft - container.offsetLeft - (container.clientWidth / 2 - card.offsetWidth / 2), behavior: "instant" });
+    }
+  }, []);
 
   // Track which card is in view via IntersectionObserver
   useEffect(() => {

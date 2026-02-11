@@ -4,7 +4,7 @@ import { useFunnelContext } from "../../context/FunnelContext";
 import Button from "../Button";
 import Logo from "../Logo";
 
-export default function NameStep() {
+export default function Consent() {
   const { nextStep, funnelData } = useFunnelContext();
 
   return (

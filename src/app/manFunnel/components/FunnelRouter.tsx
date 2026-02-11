@@ -45,6 +45,10 @@ import Coach from "./steps/Coach";
 import AppleWatch from "./steps/AppleWatch";
 import GLP from "./steps/GLP";
 import Program from "./steps/Program";
+import Commitment from "./steps/Commitment";
+import Email from "./steps/Email";
+import Promos from "./steps/Promos";
+import FinishingPlan from "./steps/FinishingPlan";
 
 export default function FunnelRouter() {
   const {
@@ -168,6 +172,14 @@ export default function FunnelRouter() {
         return <GLP />;
       case "program":
         return <Program />;
+      case "commitment":
+        return <Commitment />;
+      case "email":
+        return <Email />;
+      case "promos":
+        return <Promos />;
+      case "finishing-plan":
+        return <FinishingPlan />;
       case "fin":
         return <Fin />;
       default:

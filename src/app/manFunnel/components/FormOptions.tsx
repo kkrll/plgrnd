@@ -7,7 +7,7 @@ import { useDebouncedAction } from "../hooks/useDebouncedAction";
 
 interface FormOption {
   id: string;
-  label: string;
+  label: React.ReactNode;
   image?: string;
   icon?: React.ReactNode;
   isRecommended?: boolean;

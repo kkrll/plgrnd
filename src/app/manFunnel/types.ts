@@ -46,6 +46,9 @@ export type FunnelStep =
   | "glp"
   | "program"
   | "commitment"
+  | "email"
+  | "promos"
+  | "finishing-plan"
   | "fin";
 
 export interface FunnelData {
@@ -82,6 +85,8 @@ export interface FunnelData {
   appleWatch?: boolean;
   glp?: boolean;
   program?: string;
+  commitment?: "today" | "tomorrow" | "no";
+  email?: string;
 }
 
 export interface FunnelStepConfig {
@@ -406,6 +411,24 @@ const PLAN_PERSONALIZATION_RAW: Omit<
   {
     id: "commitment",
     title: "Are you ready to make the commitment?",
+    showProgressBar: false,
+    section: 2,
+  },
+  {
+    id: "email",
+    title: "Your results are almost ready",
+    showProgressBar: false,
+    section: 2,
+  },
+  {
+    id: "promos",
+    title: "May we send...",
+    showProgressBar: false,
+    section: 2,
+  },
+  {
+    id: "finishing-plan",
+    title: "Finishing your program",
     showProgressBar: false,
     section: 2,
   },
