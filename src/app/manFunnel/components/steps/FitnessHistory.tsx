@@ -42,9 +42,8 @@ export default function FitnessHistory() {
 
       {/* Hint message - bottom panel */}
       <div
-        className={`bottom-thing ${selected ? "animate-in" : ""
-          }`}
-        style={{ display: selected ? 'flex' : 'none' }}
+        className={`bottom-thing ${selected ? "animate-in" : ""}`}
+        style={{ display: selected ? "flex" : "none" }}
       >
         <span className="pt-2">
           <svg

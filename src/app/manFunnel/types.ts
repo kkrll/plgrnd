@@ -41,6 +41,10 @@ export type FunnelStep =
   | "cardio"
   | "cardio-equipment"
   | "injuries"
+  | "coach"
+  | "apple-watch"
+  | "glp"
+  | "program"
   | "fin";
 
 export interface FunnelData {
@@ -73,6 +77,9 @@ export interface FunnelData {
   cardio?: boolean;
   cardioEquipment?: { id: string; label: string }[];
   injuries?: { id: string; label: string }[];
+  coach?: string;
+  appleWatch?: boolean;
+  glp?: boolean;
 }
 
 export interface FunnelStepConfig {
@@ -253,36 +260,36 @@ const LIFESTYLE_AND_HABITS_RAW: Omit<
     showProgressBar: true,
     section: 1,
   },
-  {
-    id: "features",
-    title: "Just 5 minutes a day",
-    showProgressBar: true,
-    section: 1,
-  },
-  {
-    id: "water",
-    title: "How much water do you drink daily?",
-    showProgressBar: true,
-    section: 1,
-  },
-  {
-    id: "sleep",
-    title: "How much sleep do you usually get?",
-    showProgressBar: true,
-    section: 1,
-  },
+  // {
+  //   id: "features",
+  //   title: "Just 5 minutes a day",
+  //   showProgressBar: true,
+  //   section: 1,
+  // },
+  // {
+  //   id: "water",
+  //   title: "How much water do you drink daily?",
+  //   showProgressBar: true,
+  //   section: 1,
+  // },
+  // {
+  //   id: "sleep",
+  //   title: "How much sleep do you usually get?",
+  //   showProgressBar: true,
+  //   section: 1,
+  // },
   {
     id: "eating-habits",
     title: "Do you have any of the following habits?",
     showProgressBar: true,
     section: 1,
   },
-  {
-    id: "food-cravings",
-    title: "What foods do you crave most often?",
-    showProgressBar: true,
-    section: 1,
-  },
+  // {
+  //   id: "food-cravings",
+  //   title: "What foods do you crave most often?",
+  //   showProgressBar: true,
+  //   section: 1,
+  // },
   {
     id: "quote-1",
     title: "Eating is one of the ways I usually deal with stress",
@@ -332,18 +339,18 @@ const PLAN_PERSONALIZATION_RAW: Omit<
     showProgressBar: true,
     section: 2,
   },
-  {
-    id: "exercise-frequency",
-    title: "How often do you work out?",
-    showProgressBar: true,
-    section: 2,
-  },
-  {
-    id: "exercise-duration",
-    title: "How long do you want your workouts to be?",
-    showProgressBar: true,
-    section: 2,
-  },
+  // {
+  //   id: "exercise-frequency",
+  //   title: "How often do you work out?",
+  //   showProgressBar: true,
+  //   section: 2,
+  // },
+  // {
+  //   id: "exercise-duration",
+  //   title: "How long do you want your workouts to be?",
+  //   showProgressBar: true,
+  //   section: 2,
+  // },
   {
     id: "equipment",
     title: "What equipment do you have?",
@@ -366,6 +373,31 @@ const PLAN_PERSONALIZATION_RAW: Omit<
   {
     id: "injuries",
     title: "Do you have any of the following injuries?",
+    showProgressBar: true,
+    section: 2,
+  },
+  {
+    id: "coach",
+    title: "We found 3 coaches for you",
+    showProgressBar: true,
+    section: 2,
+  },
+  {
+    id: "apple-watch",
+    title: "Do you wear an Apple Watch during your workouts?",
+    showProgressBar: true,
+    section: 2,
+  },
+  {
+    id: "glp",
+    title:
+      "Are you currently using a GLP-1 medication (e.g. Ozempic, Wegovy, Mounjaro)?",
+    showProgressBar: true,
+    section: 2,
+  },
+  {
+    id: "program",
+    title: "Choose your traning program",
     showProgressBar: true,
     section: 2,
   },

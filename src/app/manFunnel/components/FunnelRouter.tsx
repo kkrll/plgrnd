@@ -41,6 +41,9 @@ import CardioEquipmentStep from "./steps/CardioEquipment";
 import CardioStep from "./steps/Cardio";
 import InjuriesStep from "./steps/Injuries";
 import Fin from "./steps/Fin";
+import Coach from "./steps/Coach";
+import AppleWatch from "./steps/AppleWatch";
+import GLP from "./steps/GLP";
 
 export default function FunnelRouter() {
   const {
@@ -113,13 +116,33 @@ export default function FunnelRouter() {
       case "food-cravings":
         return <FoodCravings />;
       case "quote-1":
-        return <QuoteStep id="quote-1" quote="Eating is one of the ways I usually deal with stress" />;
+        return (
+          <QuoteStep
+            id="quote-1"
+            quote="Eating is one of the ways I usually deal with stress"
+          />
+        );
       case "quote-2":
-        return <QuoteStep id="quote-2" quote="I struggle to resist certain foods or snacks" />;
+        return (
+          <QuoteStep
+            id="quote-2"
+            quote="I struggle to resist certain foods or snacks"
+          />
+        );
       case "quote-3":
-        return <QuoteStep id="quote-3" quote="I’m not sure how to choose workouts that are suitable for me" />;
+        return (
+          <QuoteStep
+            id="quote-3"
+            quote="I’m not sure how to choose workouts that are suitable for me"
+          />
+        );
       case "quote-4":
-        return <QuoteStep id="quote-4" quote="I struggle to stay consistent and need some outside motivation" />;
+        return (
+          <QuoteStep
+            id="quote-4"
+            quote="I struggle to stay consistent and need some outside motivation"
+          />
+        );
       case "blockers":
         return <BlockersStep />;
       case "location":
@@ -136,6 +159,12 @@ export default function FunnelRouter() {
         return <CardioEquipmentStep />;
       case "injuries":
         return <InjuriesStep />;
+      case "coach":
+        return <Coach />;
+      case "apple-watch":
+        return <AppleWatch />;
+      case "glp":
+        return <GLP />;
       case "fin":
         return <Fin />;
       default:
