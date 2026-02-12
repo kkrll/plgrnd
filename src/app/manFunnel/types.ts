@@ -433,12 +433,12 @@ const PLAN_PERSONALIZATION_RAW: Omit<
     showProgressBar: false,
     section: 2,
   },
-  {
-    id: "paywall",
-    title: "Your AI-optimized plan",
-    showProgressBar: false,
-    section: 2,
-  },
+  // {
+  //   id: "paywall",
+  //   title: "Your AI-optimized plan",
+  //   showProgressBar: false,
+  //   section: 2,
+  // },
   {
     id: "fin",
     title: "Thank you!",
