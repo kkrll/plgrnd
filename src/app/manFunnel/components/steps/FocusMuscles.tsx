@@ -144,7 +144,7 @@ export default function FocusMuscles() {
       </div>
 
       {/* Content overlay */}
-      <div className="relative z-10 w-full p-6 flex-1 flex flex-col pb-6 overflow-y-auto">
+      <div className="relative z-10 w-full p-6 flex-1 flex flex-col pb-12 overflow-y-auto">
         <h2 className="text-2xl font-bold mb-8 flex-shrink-0">
           What&apos;s your current muscle-building goal?
         </h2>

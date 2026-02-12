@@ -49,7 +49,8 @@ export type FunnelStep =
   | "email"
   | "promos"
   | "finishing-plan"
-  | "fin";
+  | "fin"
+  | "paywall";
 
 export interface FunnelData {
   age?: string;
@@ -429,6 +430,12 @@ const PLAN_PERSONALIZATION_RAW: Omit<
   {
     id: "finishing-plan",
     title: "Finishing your program",
+    showProgressBar: false,
+    section: 2,
+  },
+  {
+    id: "paywall",
+    title: "Your AI-optimized plan",
     showProgressBar: false,
     section: 2,
   },

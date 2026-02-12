@@ -100,7 +100,7 @@ export default function FormOptions({
               <div className="relative w-20 h-20 shrink-0 rounded-3xl overflow-hidden">
                 <Image
                   src={option.image}
-                  alt={option.label}
+                  alt={typeof option.label === "string" ? option.label : ""}
                   fill
                   className="object-cover"
                 />

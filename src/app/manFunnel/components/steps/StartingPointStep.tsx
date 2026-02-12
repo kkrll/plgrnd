@@ -172,14 +172,14 @@ export default function StartingPointStep() {
     bodyType && goal ? getPersonalizedMessage(bodyType, goal) : "";
 
   return (
-    <section className="w-full p-6 flex flex-col bg-black text-white overflow-y-auto">
+    <section className="w-full pt-6 px-6 pb-12 flex flex-col bg-black text-white overflow-y-auto">
       {/* Title */}
       <h3 className="text-3xl font-bold mb-6">
         Your Personalized Starting Point{`, ` + name || ""}!
       </h3>
 
       {/* Main Stats Card */}
-      <div className="bg-grey-800 rounded-3xl mb-2 relative overflow-hidden">
+      <div className="bg-grey-800 rounded-3xl mb-6 relative overflow-hidden">
         <div className="pt-6 pb-4 px-5">
           <div className="flex justify-between px-1 items-center mb-4">
             <h3>Required Effort</h3>
@@ -277,11 +277,10 @@ export default function StartingPointStep() {
       </div>*/}
 
       {/* Continue Button */}
-      <div className="mt-auto">
-        <Button type="submit" onClick={() => nextStep()}>
-          Craft My Plan
-        </Button>
-      </div>
+
+      <Button type="submit" onClick={() => nextStep()}>
+        Craft My Plan
+      </Button>
     </section>
   );
 }

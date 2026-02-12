@@ -44,6 +44,14 @@ export default function NameStep() {
           placeholder="Preferred first name"
           hint="We could call you 'Legend,' but let's use your real name"
           autoFocus
+          enterKeyHint="done"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && name.trim()) {
+              e.preventDefault();
+              updateData({ name: name.trim() });
+              nextStep();
+            }
+          }}
         />
         <Button
           type="submit"

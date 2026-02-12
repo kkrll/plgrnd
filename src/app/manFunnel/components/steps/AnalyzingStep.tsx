@@ -49,10 +49,25 @@ const Reviews = [
 ];
 
 export default function AnalyzingStep() {
-  const { nextStep } = useFunnelContext();
+  const { nextStep, funnelData } = useFunnelContext();
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const getAgeGroup = (age?: string) => {
+    switch (age) {
+      case "18-29":
+        return "under 30";
+      case "30-39":
+        return "in their 30s";
+      case "40-49":
+        return "in their 40s";
+      case "50+":
+        return "over 50";
+      default:
+        return "";
+    }
+  };
 
   useEffect(() => {
     // Animate progress from 0 to 100 over 5 seconds
@@ -112,11 +127,12 @@ export default function AnalyzingStep() {
   }, []);
 
   return (
-    <section className="w-full min-h-screen p-6 flex flex-col  bg-black text-white">
+    <section className="w-full min-h-screen px-6 pt-6 pb-12 flex flex-col  bg-black text-white">
       <div className="h-full">
         <Logo />
-        <h2 className="mb-24">
-          Dima, over 500k men in their 40s have already tried Zing.
+        <h2 className="mb-12">
+          {funnelData.name}, over 500k men in their{" "}
+          {getAgeGroup(funnelData.age)} have already tried Zing.
         </h2>
         <div
           ref={scrollRef}

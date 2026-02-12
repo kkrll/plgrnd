@@ -24,8 +24,11 @@ export default function TestimonyStep() {
               </div>
 
               {/* Testimonial text */}
-              <p className="text-white text-lg md:text-xl leading-relaxed pl-2">
-                This AI-generated workout app has become my ultimate companion. It's not just an app; it's a coach, a friend, and a beacon of inspiration. Thank you Zing, for empowering me to become the strongest version of myself.
+              <p className="text-white md:text-xl leading-relaxed pl-2">
+                This AI-generated workout app has become my ultimate companion.
+                It's not just an app; it's a coach, a friend, and a beacon of
+                inspiration. Thank you Zing, for empowering me to become the
+                strongest version of myself.
               </p>
 
               {/* Closing quote */}

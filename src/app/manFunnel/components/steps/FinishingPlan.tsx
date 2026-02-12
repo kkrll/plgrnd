@@ -1,181 +1,207 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useFunnelContext } from "../../context/FunnelContext";
-import Button from "../Button";
 import Logo from "../Logo";
 
-const Rating = () => {
-  return (
-    <div className="flex gap-[2px]">
-      {[1, 2, 3, 4, 5].map((index) => {
-        return (
-          <div className="bg-[#00B67A] h-5 w-5 flex items-center justify-center">
-            <svg
-              width="13"
-              height="12"
-              viewBox="0 0 13 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6.5 0L8.03444 4.58359H13L8.98278 7.41641L6.5 9.16718L9.36639 8.56231L9.75 9.7082L10.5172 12L6.5 9.16718L2.48278 12L4.01722 7.41641L0 4.58359H4.96556L6.5 0Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
+type Phase =
+  | "loader1"
+  | "loader2"
+  | "water-question"
+  | "loader2-resume"
+  | "sleep-question"
+  | "loader2-finish"
+  | "loader3";
 
-const Reviews = [
-  {
-    name: "Manuel O.",
-    title: "Amazing App",
-    text: "The Zing app is absolutely amazing. I started using it in April 2025 at 195 lbs after losing 65 pounds and feeling pretty flabby. From April to July, the results were incredible. The workouts are intelligently tailored to push you to your limits while still taking injuries into account. Hands down, the best fitness app I’ve ever used.",
-  },
-  {
-    name: "Sophia",
-    title: "Just do it!",
-    text: "It is very easy to just do it, to fallow the Training plan, simple, you dont do 50 différent workout, répétition is the key, perfection is the master to itch exercise. Love that you can modify your plan along the way, its simple, well explain I wake up at 4:30 am, at 5 Im at the gym or house, at 6 workout done shower taken lets go for this amazing day! 👊💪💪✌️",
-  },
-  {
-    name: "Matthew S.",
-    title: "Zing helps me be consistent",
-    text: "Zing helps me be consistent with workouts and also helps me be consistent with hitting every muscle group. I also love the workout option to select my days for workouts since I do not have a consistent work schedule so I can look ahead at my next week and adjust what days I will be working out.",
-  },
+const WATER_OPTIONS = [
+  { id: "up-to-2", label: "Up to 2" },
+  { id: "2-to-6", label: "2 to 6" },
+  { id: "6-plus", label: "6+" },
+];
+
+const SLEEP_OPTIONS = [
+  { id: "up-to-5", label: "Up to 5" },
+  { id: "6-to-8", label: "6 - 8" },
+  { id: "8-plus", label: "8+" },
 ];
 
 export default function FinishingPlan() {
-  const { nextStep } = useFunnelContext();
-  const [progress, setProgress] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const { nextStep, updateData } = useFunnelContext();
+  const [phase, setPhase] = useState<Phase>("loader1");
+  const [bar1, setBar1] = useState(0);
+  const [bar2, setBar2] = useState(0);
+  const [bar3, setBar3] = useState(0);
 
+  // Loader 1: runs 0→100
   useEffect(() => {
-    // Animate progress from 0 to 100 over 5 seconds
-    const duration = 5000;
-    const intervalTime = 50; // Update every 50ms
-    const steps = duration / intervalTime;
-    const increment = 100 / steps;
-
-    let currentProgress = 0;
-    const interval = setInterval(() => {
-      currentProgress += increment;
-      if (currentProgress >= 100) {
-        currentProgress = 100;
-        clearInterval(interval);
-        setIsComplete(true);
+    if (phase !== "loader1") return;
+    const duration = 3000;
+    const interval = 50;
+    const inc = 100 / (duration / interval);
+    let val = 0;
+    const id = setInterval(() => {
+      val += inc;
+      if (val >= 100) {
+        val = 100;
+        clearInterval(id);
+        setPhase("loader2");
       }
-      setProgress(currentProgress);
-    }, intervalTime);
+      setBar1(val);
+    }, interval);
+    return () => clearInterval(id);
+  }, [phase]);
 
-    return () => clearInterval(interval);
-  }, []);
-
-  // Autoplay carousel
+  // Loader 2: runs 0→25, pauses for water, resumes 25→90, pauses for sleep, resumes 90→100
   useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
+    if (phase !== "loader2" && phase !== "loader2-resume" && phase !== "loader2-finish") return;
 
-    let stopped = false;
+    const target = phase === "loader2" ? 25 : phase === "loader2-resume" ? 90 : 100;
+    const startFrom = phase === "loader2" ? 0 : phase === "loader2-resume" ? 25 : 90;
+    const duration = phase === "loader2" ? 1500 : phase === "loader2-resume" ? 3000 : 500;
+    const interval = 50;
+    const totalSteps = duration / interval;
+    const inc = (target - startFrom) / totalSteps;
+    let val = startFrom;
 
-    const autoplay = setInterval(() => {
-      if (stopped || !container) return;
-      const cardWidth =
-        (container.firstElementChild as HTMLElement)?.offsetWidth ?? 0;
-      const gap = 16; // gap-4 = 16px
-      const maxScroll = container.scrollWidth - container.clientWidth;
-      const nextScroll = container.scrollLeft + cardWidth + gap;
-
-      if (nextScroll > maxScroll) {
-        container.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        container.scrollBy({ left: cardWidth + gap, behavior: "smooth" });
+    const id = setInterval(() => {
+      val += inc;
+      if (val >= target) {
+        val = target;
+        clearInterval(id);
+        if (phase === "loader2") setPhase("water-question");
+        else if (phase === "loader2-resume") setPhase("sleep-question");
+        else setPhase("loader3");
       }
-    }, 3000);
+      setBar2(val);
+    }, interval);
+    return () => clearInterval(id);
+  }, [phase]);
 
-    const pause = () => {
-      stopped = true;
-      clearInterval(autoplay);
-    };
-    container.addEventListener("touchstart", pause, { once: true });
-    container.addEventListener("pointerdown", pause, { once: true });
+  // Loader 3: x2 faster
+  useEffect(() => {
+    if (phase !== "loader3") return;
+    const duration = 1500;
+    const interval = 50;
+    const inc = 100 / (duration / interval);
+    let val = 0;
+    const id = setInterval(() => {
+      val += inc;
+      if (val >= 100) {
+        val = 100;
+        clearInterval(id);
+        nextStep();
+      }
+      setBar3(val);
+    }, interval);
+    return () => clearInterval(id);
+  }, [phase, nextStep]);
 
-    return () => {
-      clearInterval(autoplay);
-      container.removeEventListener("touchstart", pause);
-      container.removeEventListener("pointerdown", pause);
-    };
-  }, []);
+  const handleWater = useCallback(
+    (option: { id: string; label: string }) => {
+      updateData({ water: option });
+      setPhase("loader2-resume");
+    },
+    [updateData]
+  );
+
+  const handleSleep = useCallback(
+    (option: { id: string; label: string }) => {
+      updateData({ sleep: option });
+      setPhase("loader2-finish");
+    },
+    [updateData]
+  );
+
+  const showQuestion = phase === "water-question" || phase === "sleep-question";
 
   return (
-    <section className="w-full min-h-screen p-6 flex flex-col  bg-black text-white">
-      <div className="h-full">
+    <section className="w-full min-h-screen p-6 flex flex-col bg-black text-white">
+      <div className="flex-1">
         <Logo />
-        <h2 className="mb-24">
-          Dima, over 500k men in their 40s have already tried Zing.
-        </h2>
-        <div
-          ref={scrollRef}
-          className="flex gap-4 items-center overflow-x-auto snap-x snap-mandatory scrollbar-hide"
-          style={{
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-            WebkitOverflowScrolling: "touch",
-          }}
-        >
-          {Reviews.map((review, i) => (
-            <div
-              key={i}
-              className="bg-grey-800 p-6 rounded-3xl snap-start shrink-0 w-[calc(100vw-48px)] max-w-sm"
-            >
-              <div className="mb-4 flex w-full justify-between">
-                <Rating />
-                <p className="text-xs text-grey-400">{review.name}</p>
-              </div>
-              <h3 className="text-lg mb-2">{review.title}</h3>
-              <p className="text-sm leading-relaxed">{review.text}</p>
+        <h2 className="text-2xl font-bold mb-12">Finishing your program...</h2>
+
+        {/* Progress bars */}
+        <div className="flex flex-col gap-8">
+          {/* Bar 1 */}
+          <div>
+            <div className="flex justify-between mb-2">
+              <span className={bar1 >= 100 ? "text-white" : "text-gray-400"}>
+                Goals and preferences...
+              </span>
+              <span className="font-bold">{Math.round(bar1)}%</span>
             </div>
-          ))}
+            <div className="w-full bg-gray-800 h-1 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-greenery-700 to-greenery-400 transition-all duration-100 ease-linear"
+                style={{ width: `${bar1}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Bar 2 */}
+          <div>
+            <div className="flex justify-between mb-2">
+              <span className={bar2 >= 100 ? "text-white" : "text-gray-400"}>
+                Activity level...
+              </span>
+              <span className="font-bold">{Math.round(bar2)}%</span>
+            </div>
+            <div className="w-full bg-gray-800 h-1 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-greenery-700 to-greenery-400 transition-all duration-100 ease-linear"
+                style={{ width: `${bar2}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Bar 3 */}
+          <div>
+            <div className="flex justify-between mb-2">
+              <span className={bar3 >= 100 ? "text-white" : "text-gray-400"}>
+                Motivation...
+              </span>
+              <span className="font-bold">{Math.round(bar3)}%</span>
+            </div>
+            <div className="w-full bg-gray-800 h-1 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-greenery-700 to-greenery-400 transition-all duration-100 ease-linear"
+                style={{ width: `${bar3}%` }}
+              />
+            </div>
+          </div>
         </div>
       </div>
-      {!isComplete ? (
-        <>
-          {/* Text and progress bar */}
-          <div className="flex-shrink-0 mb-8">
-            <h2 className="text-center mb-2">Analyzing your answers...</h2>
-            <p className="text-center text-gray-400 mb-8">
-              Meanwhile take a look at what awaits you
-            </p>
 
-            {/* Progress bar */}
-            <div className="flex gap-2 items-center">
-              <div className="w-full bg-gray-800 h-1 mt-3 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-greenery-700 to-greenery-400  transition-all duration-100 ease-linear"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-              <p className="text-right text-xl font-bold mt-4 w-14">
-                {Math.round(progress)}%
-              </p>
-            </div>
+      {/* Question overlay */}
+      {showQuestion && (
+        <div className="flex-shrink-0 bg-gray-800 rounded-2xl p-6 mb-4">
+          <div className="flex items-center gap-3 mb-6">
+            {/* Red square icon placeholder */}
+            <div className="w-10 h-10 bg-red-500 rounded-lg flex-shrink-0" />
+            <h3 className="text-xl font-bold">
+              {phase === "water-question"
+                ? "How many glasses of water do you drink daily?"
+                : "How much sleep do you usually get?"}
+            </h3>
           </div>
-        </>
-      ) : (
-        <>
-          {/* Completion message */}
-          <div className="flex-shrink-0">
-            <h2 className="text-center mb-8">Your starting point is ready!</h2>
-
-            <Button type="submit" onClick={() => nextStep()}>
-              Continue
-            </Button>
+          <div className="flex gap-3">
+            {(phase === "water-question" ? WATER_OPTIONS : SLEEP_OPTIONS).map(
+              (option) => (
+                <button
+                  key={option.id}
+                  onClick={() =>
+                    phase === "water-question"
+                      ? handleWater(option)
+                      : handleSleep(option)
+                  }
+                  className="flex-1 bg-gray-700 hover:bg-gray-600 rounded-xl py-4 px-3 text-center font-medium transition-colors"
+                >
+                  {option.label}
+                </button>
+              )
+            )}
           </div>
-        </>
+        </div>
       )}
     </section>
   );
