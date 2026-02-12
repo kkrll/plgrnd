@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useFunnelContext } from "../../context/FunnelContext";
 import Input from "../Input";
 import Button from "../Button";
@@ -8,12 +8,20 @@ import Logo from "../Logo";
 
 export default function Email() {
   const { updateData, nextStep } = useFunnelContext();
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      inputRef.current?.focus();
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (name.trim()) {
-      updateData({ name: name.trim() });
+    if (email.trim()) {
+      updateData({ email: email.trim() });
       nextStep();
     }
   };
@@ -32,6 +40,7 @@ export default function Email() {
         className="flex flex-col justify-between flex-1"
       >
         <Input
+          ref={inputRef}
           icon={
             <svg
               width="18"
@@ -47,8 +56,8 @@ export default function Email() {
             </svg>
           }
           type="email"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder="Email address"
           hint={
             <div className="flex gap-2 ml-2">
@@ -77,9 +86,16 @@ export default function Email() {
               </span>
             </div>
           }
-          autoFocus
+          enterKeyHint="done"
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && email.trim()) {
+              e.preventDefault();
+              updateData({ email: email.trim() });
+              nextStep();
+            }
+          }}
         />
-        <Button type="submit" disabled={!name.trim()}>
+        <Button type="submit" disabled={!email.trim()}>
           Continue
         </Button>
       </form>

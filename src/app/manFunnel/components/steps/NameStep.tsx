@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useFunnelContext } from '../../context/FunnelContext';
 import Input from '../Input';
 import Button from '../Button';
@@ -8,6 +8,15 @@ import Button from '../Button';
 export default function NameStep() {
   const { updateData, nextStep } = useFunnelContext();
   const [name, setName] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    // Timeout trick to open keyboard on mobile
+    const timer = setTimeout(() => {
+      inputRef.current?.focus();
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,9 +29,9 @@ export default function NameStep() {
   return (
     <section className="w-full p-6 min-h-screen flex flex-col">
       <div className="mb-4">
-        <img 
-          src="/man-funnel/logo.svg" 
-          alt="Logo" 
+        <img
+          src="/man-funnel/logo.svg"
+          alt="Logo"
           className="h-12 w-auto"
         />
       </div>
@@ -32,6 +41,7 @@ export default function NameStep() {
 
       <form onSubmit={handleSubmit} className="flex flex-col justify-between flex-1">
         <Input
+          ref={inputRef}
           icon={
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M11.9678 21.9472C17.4207 21.9472 21.9355 17.4324 21.9355 11.9795C21.9355 6.53631 17.4109 2.01172 11.958 2.01172C6.51482 2.01172 2 6.53631 2 11.9795C2 17.4324 6.52459 21.9472 11.9678 21.9472Z" fill="#4F535E"/>
@@ -43,7 +53,6 @@ export default function NameStep() {
           onChange={(e) => setName(e.target.value)}
           placeholder="Preferred first name"
           hint="We could call you 'Legend,' but let's use your real name"
-          autoFocus
           enterKeyHint="done"
           onKeyDown={(e) => {
             if (e.key === "Enter" && name.trim()) {
