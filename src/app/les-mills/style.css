@@ -1,66 +1,97 @@
+.lm-middle {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    max-height: min(512px, 100vw);
+}
+
+.lm-middle-content {
+    width: 100%;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    height: 100%;
+    max-height: calc(100vw-48px);
+}
+
 .lm-grid {
-  isolation: isolate;
-  --tile-grow: 2.03;
-  --tile-gap: 0.25rem;
-  --tile-shift: calc(100% + var(--tile-gap));
-  -webkit-mask-image: linear-gradient(
-    176deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 1) 50%,
-    rgba(0, 0, 0, 0.78) 70%,
-    rgba(0, 0, 0, 0) 95%
-  );
-  mask-image: linear-gradient(
-    176deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 1) 50%,
-    rgba(0, 0, 0, 0.78) 70%,
-    rgba(0, 0, 0, 0) 95%
-  );
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
+    isolation: isolate;
+    --tile-grow: 2.03;
+    --tile-gap: 0.25rem;
+    --tile-shift: calc(100% + var(--tile-gap));
+}
+
+.lm-logo-gradient {
+    width: 100%;
+    padding-top: 120px;
+    padding-bottom: 8px;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(
+        176deg,
+        rgba(243, 244, 246, 0) 15%,
+        rgba(243, 244, 246, 0.72) 40%,
+        rgba(243, 244, 246, 1) 60%
+    );
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    pointer-events: none;
 }
 
 .lm-cell {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  border-radius: 24px;
-  transform: translate(0, 0) scale(1);
-  transform-origin: top left;
-  opacity: 1;
-  z-index: 1;
-  transition:
-    transform 780ms cubic-bezier(0.22, 0.61, 0.36, 1),
-    opacity 340ms ease;
-  transition-delay: 0ms, 120ms;
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 16px;
+    transform: translate(0, 0) scale(1);
+    transform-origin: top left;
+    opacity: 1;
+    z-index: 1;
+    transition:
+        transform 780ms ease-in-out,
+        opacity 340ms ease,
+        border-radius 780ms ease-in-out;
+    transition-delay: 0ms, 120ms;
 }
 
 .lm-cell.grow-rb {
-  transform: translate(0, 0) scale(var(--tile-grow));
-  z-index: 20;
+    transform: translate(0, 0) scale(var(--tile-grow));
+    z-index: 20;
+    border-radius: 8px;
 }
 
 .lm-cell.grow-rt {
-  transform: translate(0, calc(-1 * var(--tile-shift))) scale(var(--tile-grow));
-  z-index: 20;
+    transform: translate(0, calc(-1 * var(--tile-shift)))
+        scale(var(--tile-grow));
+    z-index: 20;
+    border-radius: 8px;
 }
 
 .lm-cell.grow-lb {
-  transform: translate(calc(-1 * var(--tile-shift)), 0) scale(var(--tile-grow));
-  z-index: 20;
+    transform: translate(calc(-1 * var(--tile-shift)), 0)
+        scale(var(--tile-grow));
+    z-index: 20;
+    border-radius: 8px;
 }
 
 .lm-cell.grow-lt {
-  transform: translate(calc(-1 * var(--tile-shift)), calc(-1 * var(--tile-shift)))
-    scale(var(--tile-grow));
-  z-index: 20;
+    transform: translate(
+            calc(-1 * var(--tile-shift)),
+            calc(-1 * var(--tile-shift))
+        )
+        scale(var(--tile-grow));
+    z-index: 20;
+    border-radius: 8px;
 }
 
 .lm-cell.overlayed {
-  opacity: 0;
-  pointer-events: none;
-  transition-delay: 0ms, 0ms;
+    opacity: 0;
+    pointer-events: none;
+    transition-delay: 0ms, 0ms;
 }
