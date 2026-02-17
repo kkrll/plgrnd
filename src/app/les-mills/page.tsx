@@ -90,7 +90,7 @@ const LesMills = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIteration((prev) => prev < gridMap.length - 1 ? prev + 1 : 0);
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
