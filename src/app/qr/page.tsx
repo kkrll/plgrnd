@@ -5,7 +5,8 @@ import "./styles.css";
 import QRCodeStyling from "qr-code-styling";
 import CardBg from "./cardBg";
 
-const baseUrl = "https://www.newyorksportsclubs.zing.coach/";
+const baseUrl =
+  "https://apps.apple.com/pl/app/zing-ai-home-gym-workouts/id1552207792";
 const defaultParams = {
   ref: "campaign_victory",
   theme: "dark",

@@ -34,6 +34,24 @@
     }
 }
 
+@layer base {
+    h1 {
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 48px; /* 120% */
+        letter-spacing: 0.148px;
+    }
+    h2 {
+        text-align: center;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 32px; /* 133.333% */
+        letter-spacing: 0.017px;
+    }
+}
+
 body {
     color: rgb(var(--foreground-rgb));
     background: linear-gradient(

@@ -28,9 +28,7 @@ export default function FunnelContainer({
       {/* Progress Bar */}
       {showProgressBar && (
         <div className="sticky top-0 z-20 bg-black/80 backdrop-blur-sm">
-          <ProgressBar
-            sectionProgress={sectionProgress}
-          />
+          <ProgressBar sectionProgress={sectionProgress} />
         </div>
       )}
 
@@ -38,10 +36,11 @@ export default function FunnelContainer({
       <div className="relative w-full flex-1 flex">
         <div
           key={currentStep}
-          className={`w-full flex-1 flex ${direction === "forward"
-            ? "animate-slide-in-forward"
-            : "animate-slide-in-backward"
-            }`}
+          className={`w-full flex-1 flex ${
+            direction === "forward"
+              ? "animate-slide-in-forward"
+              : "animate-slide-in-backward"
+          }`}
         >
           {children}
         </div>

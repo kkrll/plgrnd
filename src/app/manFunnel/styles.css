@@ -147,7 +147,7 @@ span {
     max-height: 100%;
 }
 
-.video-container::after {
+.video-container video::after {
     content: "";
     position: absolute;
     bottom: 0;

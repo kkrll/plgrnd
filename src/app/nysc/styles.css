@@ -1,5 +1,5 @@
 .promo-mask {
-    --mask-y: 67%;
+    --mask-y: 45%;
 }
 @media (min-width: 768px) {
     .promo-mask {
