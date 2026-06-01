@@ -1,7 +1,15 @@
 "use client";
 
 import Logo from "./logo";
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+
+const AUTO_ADVANCE_MS = 8_000;
 
 const CARDS = [
   {
@@ -36,27 +44,92 @@ const CARDS = [
   },
 ] as const;
 
-const Steps = ({ step, className }: { step: number; className?: string }) => {
+const Steps = ({
+  step,
+  animate,
+  progressKey,
+  className,
+}: {
+  step: number;
+  animate: boolean;
+  progressKey: number;
+  className?: string;
+}) => {
   return (
     <div
       className={`flex gap-2 w-full transition-all duration-300 ${className}`}
     >
-      {[1, 2, 3, 4].map((item) => (
-        <div
-          key={item}
-          className="flex-1 h-1 rounded-full transition-all duration-300"
-          style={{
-            backgroundColor: step === item ? "black" : "rgba(0, 0, 0, 0.1)",
-          }}
-        />
-      ))}
+      {[1, 2, 3, 4].map((item) => {
+        const isCompleted = item < step;
+        const isActive = item === step;
+
+        return (
+          <div
+            key={item}
+            className="h-1 flex-1 overflow-hidden rounded-full bg-black/10"
+          >
+            <div
+              key={isActive ? `${item}-${progressKey}` : item}
+              className={`h-full w-full origin-left rounded-full bg-black ${
+                isActive && animate ? "nysc-story-fill-active" : ""
+              }`}
+              style={{
+                ["--story-duration" as string]: `${AUTO_ADVANCE_MS}ms`,
+                transform:
+                  isCompleted || (isActive && !animate)
+                    ? "scaleX(1)"
+                    : isActive
+                      ? undefined
+                      : "scaleX(0)",
+              }}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };
 
 const NyscLandPage = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const stepRef = useRef(0);
+  const isAutoScrolling = useRef(false);
+  const autoScrollResetTimer = useRef<number | null>(null);
   const [step, setStep] = useState(0);
+  const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
+  const [progressKey, setProgressKey] = useState(0);
+
+  stepRef.current = step;
+
+  const disableAutoScroll = useCallback(() => {
+    setAutoScrollEnabled(false);
+  }, []);
+
+  const scrollToStep = useCallback((index: number) => {
+    const root = scrollRef.current;
+    if (!root?.children[index]) return;
+
+    isAutoScrolling.current = true;
+    setStep(index);
+    setProgressKey((key) => key + 1);
+
+    (root.children[index] as HTMLElement).scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+
+    if (autoScrollResetTimer.current !== null) {
+      window.clearTimeout(autoScrollResetTimer.current);
+    }
+
+    autoScrollResetTimer.current = window.setTimeout(() => {
+      isAutoScrolling.current = false;
+    }, 800);
+
+    if (index >= CARDS.length - 1) {
+      setAutoScrollEnabled(false);
+    }
+  }, []);
 
   const updateStepFromScroll = useCallback(() => {
     const root = scrollRef.current;
@@ -77,8 +150,24 @@ const NyscLandPage = () => {
       }
     });
 
-    setStep(best);
+    setStep((prev) => {
+      if (prev !== best) {
+        setProgressKey((key) => key + 1);
+
+        if (best >= CARDS.length - 1) {
+          setAutoScrollEnabled(false);
+        }
+      }
+      return best;
+    });
   }, []);
+
+  const handleScroll = useCallback(() => {
+    if (isAutoScrolling.current) return;
+
+    disableAutoScroll();
+    updateStepFromScroll();
+  }, [disableAutoScroll, updateStepFromScroll]);
 
   useLayoutEffect(() => {
     updateStepFromScroll();
@@ -87,8 +176,47 @@ const NyscLandPage = () => {
     return () => window.removeEventListener("resize", onResize);
   }, [updateStepFromScroll]);
 
+  useEffect(() => {
+    if (!autoScrollEnabled) return;
+
+    const intervalId = window.setInterval(() => {
+      if (stepRef.current >= CARDS.length - 1) {
+        setAutoScrollEnabled(false);
+        return;
+      }
+
+      scrollToStep(stepRef.current + 1);
+    }, AUTO_ADVANCE_MS);
+
+    return () => window.clearInterval(intervalId);
+  }, [autoScrollEnabled, scrollToStep]);
+
+  useEffect(() => {
+    return () => {
+      if (autoScrollResetTimer.current !== null) {
+        window.clearTimeout(autoScrollResetTimer.current);
+      }
+    };
+  }, []);
+
   return (
     <div className="relative h-dvh bg-white">
+      <style jsx global>{`
+        @keyframes nysc-story-progress {
+          from {
+            transform: scaleX(0);
+          }
+          to {
+            transform: scaleX(1);
+          }
+        }
+
+        .nysc-story-fill-active {
+          animation: nysc-story-progress var(--story-duration, 20s) linear
+            forwards;
+        }
+      `}</style>
+
       <div className="absolute top-0 left-0 right-0 flex flex-col gap-2 shrink-0 items-center justify-center p-4 bg-white/60 backdrop-blur-sm z-10">
         <Logo
           className={
@@ -99,6 +227,8 @@ const NyscLandPage = () => {
         />
         <Steps
           step={step}
+          animate={autoScrollEnabled}
+          progressKey={progressKey}
           className={
             step === 0
               ? "opacity-0 translate-y-full"
@@ -109,7 +239,9 @@ const NyscLandPage = () => {
 
       <div
         ref={scrollRef}
-        onScroll={updateStepFromScroll}
+        onScroll={handleScroll}
+        onTouchStart={disableAutoScroll}
+        onPointerDown={disableAutoScroll}
         className="no-scrollbar h-full min-h-0 overflow-y-auto snap-y snap-mandatory touch-pan-y py-24"
       >
         {CARDS.map((card) => (
